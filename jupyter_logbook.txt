@@ -1,0 +1,19 @@
+[I 12:33:59.628 NotebookApp] The port 8888 is already in use, trying another port.
+[I 12:33:59.628 NotebookApp] The port 8889 is already in use, trying another port.
+[I 12:33:59.629 NotebookApp] The port 8890 is already in use, trying another port.
+[I 12:33:59.629 NotebookApp] The port 8891 is already in use, trying another port.
+[I 12:33:59.629 NotebookApp] The port 8892 is already in use, trying another port.
+[I 12:34:03.194 NotebookApp] jupyter_tensorboard extension loaded.
+[I 12:34:04.396 NotebookApp] JupyterLab extension loaded from /opt/conda/lib/python3.6/site-packages/jupyterlab
+[I 12:34:04.396 NotebookApp] JupyterLab application directory is /opt/conda/share/jupyter/lab
+[I 12:34:04.721 NotebookApp] [Jupytext Server Extension] NotebookApp.contents_manager_class is (a subclass of) jupytext.TextFileContentsManager already - OK
+[I 12:34:04.722 NotebookApp] Serving notebooks from local directory: /home/bhuckell/WatChMaL_analysis
+[I 12:34:04.722 NotebookApp] Jupyter Notebook 6.1.4 is running at:
+[I 12:34:04.722 NotebookApp] http://hostname:8888/?token=642bc5c31977d5b5276b05fb800e82d823189c524b90f3ba
+[I 12:34:04.722 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 12:34:04.739 NotebookApp] 
+    
+    To access the notebook, open this file in a browser:
+        file:///home/bhuckell/.local/share/jupyter/runtime/nbserver-37308-open.html
+    Or copy and paste this URL:
+        http://hostname:8888/?token=642bc5c31977d5b5276b05fb800e82d823189c524b90f3ba
