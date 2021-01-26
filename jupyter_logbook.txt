@@ -1,19 +1,111 @@
-[I 12:33:59.628 NotebookApp] The port 8888 is already in use, trying another port.
-[I 12:33:59.628 NotebookApp] The port 8889 is already in use, trying another port.
-[I 12:33:59.629 NotebookApp] The port 8890 is already in use, trying another port.
-[I 12:33:59.629 NotebookApp] The port 8891 is already in use, trying another port.
-[I 12:33:59.629 NotebookApp] The port 8892 is already in use, trying another port.
-[I 12:34:03.194 NotebookApp] jupyter_tensorboard extension loaded.
-[I 12:34:04.396 NotebookApp] JupyterLab extension loaded from /opt/conda/lib/python3.6/site-packages/jupyterlab
-[I 12:34:04.396 NotebookApp] JupyterLab application directory is /opt/conda/share/jupyter/lab
-[I 12:34:04.721 NotebookApp] [Jupytext Server Extension] NotebookApp.contents_manager_class is (a subclass of) jupytext.TextFileContentsManager already - OK
-[I 12:34:04.722 NotebookApp] Serving notebooks from local directory: /home/bhuckell/WatChMaL_analysis
-[I 12:34:04.722 NotebookApp] Jupyter Notebook 6.1.4 is running at:
-[I 12:34:04.722 NotebookApp] http://hostname:8888/?token=642bc5c31977d5b5276b05fb800e82d823189c524b90f3ba
-[I 12:34:04.722 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
-[C 12:34:04.739 NotebookApp] 
+[I 20:14:00.885 NotebookApp] The port 8888 is already in use, trying another port.
+[I 20:14:00.886 NotebookApp] The port 8889 is already in use, trying another port.
+[I 20:14:00.886 NotebookApp] The port 8890 is already in use, trying another port.
+[I 20:14:00.886 NotebookApp] The port 8891 is already in use, trying another port.
+[I 20:14:00.886 NotebookApp] The port 8892 is already in use, trying another port.
+[I 20:14:03.002 NotebookApp] jupyter_tensorboard extension loaded.
+[I 20:14:03.561 NotebookApp] JupyterLab extension loaded from /opt/conda/lib/python3.6/site-packages/jupyterlab
+[I 20:14:03.561 NotebookApp] JupyterLab application directory is /opt/conda/share/jupyter/lab
+[I 20:14:03.811 NotebookApp] [Jupytext Server Extension] NotebookApp.contents_manager_class is (a subclass of) jupytext.TextFileContentsManager already - OK
+[I 20:14:03.813 NotebookApp] Serving notebooks from local directory: /home/bhuckell/WatChMaL_analysis
+[I 20:14:03.813 NotebookApp] Jupyter Notebook 6.1.4 is running at:
+[I 20:14:03.813 NotebookApp] http://hostname:8888/?token=96495f8aa56aeccb9e7e8e401d8782d2357782d554a0243d
+[I 20:14:03.813 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 20:14:03.822 NotebookApp] 
     
     To access the notebook, open this file in a browser:
-        file:///home/bhuckell/.local/share/jupyter/runtime/nbserver-37308-open.html
+        file:///home/bhuckell/.local/share/jupyter/runtime/nbserver-42087-open.html
     Or copy and paste this URL:
-        http://hostname:8888/?token=642bc5c31977d5b5276b05fb800e82d823189c524b90f3ba
+        http://hostname:8888/?token=96495f8aa56aeccb9e7e8e401d8782d2357782d554a0243d
+[I 20:15:56.073 NotebookApp] 302 GET /?token=96495f8aa56aeccb9e7e8e401d8782d2357782d554a0243d (::1) 1.84ms
+[I 20:20:15.912 NotebookApp] Kernel started: 112dcf7e-d13b-4c3b-aca8-1da3054615a7, name: python3
+[I 20:20:19.050 NotebookApp] Kernel started: 65a067c2-7cf6-47ad-8f6a-2548f4dc8edd, name: python3
+[I 20:22:15.886 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 20:22:15.888 NotebookApp] Saving EDA_Testing.ipynb
+[I 20:22:19.103 NotebookApp] Saving file at /EDA_new.ipynb
+[I 20:22:19.105 NotebookApp] Saving EDA_new.ipynb
+[I 20:26:15.889 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 20:26:15.891 NotebookApp] Saving EDA_Testing.ipynb
+[I 20:28:15.893 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 20:28:15.894 NotebookApp] Saving EDA_Testing.ipynb
+[I 20:32:15.892 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 20:32:15.893 NotebookApp] Saving EDA_Testing.ipynb
+[I 20:34:15.885 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 20:34:15.887 NotebookApp] Saving EDA_Testing.ipynb
+[I 20:36:15.902 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 20:36:15.904 NotebookApp] Saving EDA_Testing.ipynb
+[I 20:38:15.892 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 20:38:15.894 NotebookApp] Saving EDA_Testing.ipynb
+[I 20:42:15.883 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 20:42:15.884 NotebookApp] Saving EDA_Testing.ipynb
+[I 20:44:15.886 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 20:44:15.888 NotebookApp] Saving EDA_Testing.ipynb
+[I 20:46:15.876 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 20:46:15.878 NotebookApp] Saving EDA_Testing.ipynb
+[I 20:48:15.881 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 20:48:15.882 NotebookApp] Saving EDA_Testing.ipynb
+[I 20:50:15.868 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 20:50:15.870 NotebookApp] Saving EDA_Testing.ipynb
+[I 20:52:15.881 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 20:52:15.882 NotebookApp] Saving EDA_Testing.ipynb
+[I 20:54:15.899 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 20:54:15.901 NotebookApp] Saving EDA_Testing.ipynb
+[I 20:58:15.874 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 20:58:15.876 NotebookApp] Saving EDA_Testing.ipynb
+[I 21:00:15.910 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 21:00:15.911 NotebookApp] Saving EDA_Testing.ipynb
+[I 21:02:15.905 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 21:02:15.907 NotebookApp] Saving EDA_Testing.ipynb
+[I 21:04:15.912 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 21:04:15.914 NotebookApp] Saving EDA_Testing.ipynb
+[I 21:06:15.892 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 21:06:15.894 NotebookApp] Saving EDA_Testing.ipynb
+[I 21:08:15.864 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 21:08:15.866 NotebookApp] Saving EDA_Testing.ipynb
+[I 21:10:15.874 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 21:10:15.876 NotebookApp] Saving EDA_Testing.ipynb
+[I 21:16:15.876 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 21:16:15.877 NotebookApp] Saving EDA_Testing.ipynb
+[I 21:18:15.872 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 21:18:15.874 NotebookApp] Saving EDA_Testing.ipynb
+[I 21:20:15.869 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 21:20:15.871 NotebookApp] Saving EDA_Testing.ipynb
+[I 21:22:15.917 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 21:22:15.919 NotebookApp] Saving EDA_Testing.ipynb
+[I 21:24:15.891 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 21:24:15.893 NotebookApp] Saving EDA_Testing.ipynb
+[I 21:30:15.900 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 21:30:15.902 NotebookApp] Saving EDA_Testing.ipynb
+[I 21:32:15.905 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 21:32:15.907 NotebookApp] Saving EDA_Testing.ipynb
+[I 21:34:15.939 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 21:34:15.941 NotebookApp] Saving EDA_Testing.ipynb
+[I 21:36:15.943 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 21:36:15.945 NotebookApp] Saving EDA_Testing.ipynb
+[I 21:38:15.943 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 21:38:15.944 NotebookApp] Saving EDA_Testing.ipynb
+[I 21:40:15.940 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 21:40:15.942 NotebookApp] Saving EDA_Testing.ipynb
+[I 21:42:15.945 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 21:42:15.947 NotebookApp] Saving EDA_Testing.ipynb
+[I 21:48:15.944 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 21:48:15.946 NotebookApp] Saving EDA_Testing.ipynb
+[I 21:50:15.939 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 21:50:15.941 NotebookApp] Saving EDA_Testing.ipynb
+[I 21:52:15.894 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 21:52:15.895 NotebookApp] Saving EDA_Testing.ipynb
+[I 21:54:15.896 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 21:54:15.898 NotebookApp] Saving EDA_Testing.ipynb
+[I 21:56:15.906 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 21:56:15.907 NotebookApp] Saving EDA_Testing.ipynb
+[I 21:57:45.456 NotebookApp] Kernel interrupted: 112dcf7e-d13b-4c3b-aca8-1da3054615a7
+[I 21:58:11.227 NotebookApp] Kernel interrupted: 112dcf7e-d13b-4c3b-aca8-1da3054615a7
+[I 21:58:15.896 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 21:58:15.897 NotebookApp] Saving EDA_Testing.ipynb
+[I 21:58:30.130 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 21:58:30.131 NotebookApp] Saving EDA_Testing.ipynb
+[I 21:58:43.972 NotebookApp] Starting buffering for 112dcf7e-d13b-4c3b-aca8-1da3054615a7:5b7961845e98477c8c8df3612e504dc7
+[I 21:58:49.043 NotebookApp] Kernel restarted: 112dcf7e-d13b-4c3b-aca8-1da3054615a7
+[I 21:58:49.081 NotebookApp] Restoring connection for 112dcf7e-d13b-4c3b-aca8-1da3054615a7:5b7961845e98477c8c8df3612e504dc7
+[I 22:00:15.897 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 22:00:15.899 NotebookApp] Saving EDA_Testing.ipynb
