@@ -1,0 +1,429 @@
+[I 10:30:53.382 NotebookApp] The port 8888 is already in use, trying another port.
+[I 10:30:53.382 NotebookApp] The port 8889 is already in use, trying another port.
+[I 10:30:53.382 NotebookApp] The port 8890 is already in use, trying another port.
+[I 10:30:53.383 NotebookApp] The port 8891 is already in use, trying another port.
+[I 10:30:53.383 NotebookApp] The port 8892 is already in use, trying another port.
+[I 10:30:55.802 NotebookApp] jupyter_tensorboard extension loaded.
+[I 10:30:56.374 NotebookApp] JupyterLab extension loaded from /opt/conda/lib/python3.6/site-packages/jupyterlab
+[I 10:30:56.374 NotebookApp] JupyterLab application directory is /opt/conda/share/jupyter/lab
+[I 10:30:56.645 NotebookApp] [Jupytext Server Extension] NotebookApp.contents_manager_class is (a subclass of) jupytext.TextFileContentsManager already - OK
+[I 10:30:56.647 NotebookApp] Serving notebooks from local directory: /home/bhuckell/WatChMaL_analysis
+[I 10:30:56.647 NotebookApp] Jupyter Notebook 6.1.4 is running at:
+[I 10:30:56.647 NotebookApp] http://hostname:8888/?token=495c516b321fbad60d51abe8f1d5ff6bb39cc46036cef5ca
+[I 10:30:56.647 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 10:30:56.656 NotebookApp] 
+    
+    To access the notebook, open this file in a browser:
+        file:///home/bhuckell/.local/share/jupyter/runtime/nbserver-29418-open.html
+    Or copy and paste this URL:
+        http://hostname:8888/?token=495c516b321fbad60d51abe8f1d5ff6bb39cc46036cef5ca
+[I 10:32:42.115 NotebookApp] 302 GET /?token=495c516b321fbad60d51abe8f1d5ff6bb39cc46036cef5ca (::1) 2.49ms
+[I 10:32:47.976 NotebookApp] Kernel started: 01a8a8d7-4d58-4d1f-803e-bf368de41253, name: python3
+[I 10:32:49.610 NotebookApp] Kernel started: d2e73d1f-c7b7-483d-87ea-e631939c1e7a, name: python3
+[I 10:38:34.458 NotebookApp] Kernel interrupted: d2e73d1f-c7b7-483d-87ea-e631939c1e7a
+[I 10:38:49.643 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 10:38:49.645 NotebookApp] Saving EDA_Testing.ipynb
+[I 10:38:51.947 NotebookApp] Starting buffering for d2e73d1f-c7b7-483d-87ea-e631939c1e7a:996c22bc3d8f468380c1131320e4b77b
+[I 10:39:04.811 NotebookApp] Kernel interrupted: d2e73d1f-c7b7-483d-87ea-e631939c1e7a
+[I 10:39:05.593 NotebookApp] Kernel interrupted: d2e73d1f-c7b7-483d-87ea-e631939c1e7a
+[I 10:39:09.060 NotebookApp] Starting buffering for d2e73d1f-c7b7-483d-87ea-e631939c1e7a:0f2381119f04440a80e584808246d696
+[I 10:39:14.108 NotebookApp] Kernel restarted: d2e73d1f-c7b7-483d-87ea-e631939c1e7a
+[I 10:39:14.161 NotebookApp] Restoring connection for d2e73d1f-c7b7-483d-87ea-e631939c1e7a:0f2381119f04440a80e584808246d696
+[I 10:39:14.161 NotebookApp] Replaying 1 buffered messages
+[I 10:40:53.334 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 10:40:53.336 NotebookApp] Saving EDA_Testing.ipynb
+[I 10:42:53.345 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 10:42:53.347 NotebookApp] Saving EDA_Testing.ipynb
+[I 13:18:53.351 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 13:18:53.353 NotebookApp] Saving EDA_Testing.ipynb
+[I 13:22:53.348 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 13:22:53.350 NotebookApp] Saving EDA_Testing.ipynb
+[I 13:24:53.342 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 13:24:53.344 NotebookApp] Saving EDA_Testing.ipynb
+[I 13:26:53.338 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 13:26:53.340 NotebookApp] Saving EDA_Testing.ipynb
+[I 13:30:53.343 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 13:30:53.345 NotebookApp] Saving EDA_Testing.ipynb
+[I 13:32:53.347 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 13:32:53.348 NotebookApp] Saving EDA_Testing.ipynb
+[I 13:34:53.333 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 13:34:53.335 NotebookApp] Saving EDA_Testing.ipynb
+[I 13:36:53.339 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 13:36:53.341 NotebookApp] Saving EDA_Testing.ipynb
+[I 13:42:53.342 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 13:42:53.344 NotebookApp] Saving EDA_Testing.ipynb
+[I 13:58:53.356 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 13:58:53.358 NotebookApp] Saving EDA_Testing.ipynb
+[I 14:00:53.347 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 14:00:53.349 NotebookApp] Saving EDA_Testing.ipynb
+[I 14:02:53.340 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 14:02:53.341 NotebookApp] Saving EDA_Testing.ipynb
+[I 14:04:53.341 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 14:04:53.343 NotebookApp] Saving EDA_Testing.ipynb
+[I 14:05:51.990 NotebookApp] Starting buffering for d2e73d1f-c7b7-483d-87ea-e631939c1e7a:0f2381119f04440a80e584808246d696
+[I 14:05:57.288 NotebookApp] Kernel restarted: d2e73d1f-c7b7-483d-87ea-e631939c1e7a
+[I 14:05:57.334 NotebookApp] Restoring connection for d2e73d1f-c7b7-483d-87ea-e631939c1e7a:0f2381119f04440a80e584808246d696
+[I 14:06:33.362 NotebookApp] Starting buffering for d2e73d1f-c7b7-483d-87ea-e631939c1e7a:0f2381119f04440a80e584808246d696
+[I 14:06:38.574 NotebookApp] Kernel restarted: d2e73d1f-c7b7-483d-87ea-e631939c1e7a
+[I 14:06:38.616 NotebookApp] Restoring connection for d2e73d1f-c7b7-483d-87ea-e631939c1e7a:0f2381119f04440a80e584808246d696
+[I 14:06:53.332 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 14:06:53.334 NotebookApp] Saving EDA_Testing.ipynb
+[I 14:08:53.339 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 14:08:53.340 NotebookApp] Saving EDA_Testing.ipynb
+[I 14:09:08.789 NotebookApp] Starting buffering for d2e73d1f-c7b7-483d-87ea-e631939c1e7a:0f2381119f04440a80e584808246d696
+[I 14:09:14.038 NotebookApp] Kernel restarted: d2e73d1f-c7b7-483d-87ea-e631939c1e7a
+[I 14:09:14.134 NotebookApp] Restoring connection for d2e73d1f-c7b7-483d-87ea-e631939c1e7a:0f2381119f04440a80e584808246d696
+[I 14:09:53.153 NotebookApp] Starting buffering for d2e73d1f-c7b7-483d-87ea-e631939c1e7a:0f2381119f04440a80e584808246d696
+[I 14:09:58.306 NotebookApp] Kernel restarted: d2e73d1f-c7b7-483d-87ea-e631939c1e7a
+[I 14:09:58.357 NotebookApp] Restoring connection for d2e73d1f-c7b7-483d-87ea-e631939c1e7a:0f2381119f04440a80e584808246d696
+[I 14:10:53.331 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 14:10:53.333 NotebookApp] Saving EDA_Testing.ipynb
+[I 14:10:53.788 NotebookApp] Starting buffering for d2e73d1f-c7b7-483d-87ea-e631939c1e7a:0f2381119f04440a80e584808246d696
+[I 14:10:59.008 NotebookApp] Kernel restarted: d2e73d1f-c7b7-483d-87ea-e631939c1e7a
+[I 14:10:59.051 NotebookApp] Restoring connection for d2e73d1f-c7b7-483d-87ea-e631939c1e7a:0f2381119f04440a80e584808246d696
+[I 14:12:53.336 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 14:12:53.338 NotebookApp] Saving EDA_Testing.ipynb
+[I 14:14:53.341 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 14:14:53.343 NotebookApp] Saving EDA_Testing.ipynb
+[I 14:16:53.348 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 14:16:53.350 NotebookApp] Saving EDA_Testing.ipynb
+[I 14:18:53.344 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 14:18:53.345 NotebookApp] Saving EDA_Testing.ipynb
+[I 14:20:53.386 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 14:20:53.387 NotebookApp] Saving EDA_Testing.ipynb
+[I 14:22:53.350 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 14:22:53.352 NotebookApp] Saving EDA_Testing.ipynb
+[I 14:28:53.331 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 14:28:53.333 NotebookApp] Saving EDA_Testing.ipynb
+[I 14:30:53.356 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 14:30:53.357 NotebookApp] Saving EDA_Testing.ipynb
+[I 14:32:53.380 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 14:32:53.381 NotebookApp] Saving EDA_Testing.ipynb
+[I 14:34:53.360 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 14:34:53.362 NotebookApp] Saving EDA_Testing.ipynb
+[I 14:36:53.346 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 14:36:53.348 NotebookApp] Saving EDA_Testing.ipynb
+[I 14:38:53.344 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 14:38:53.346 NotebookApp] Saving EDA_Testing.ipynb
+[I 14:42:53.346 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 14:42:53.348 NotebookApp] Saving EDA_Testing.ipynb
+[I 14:44:53.369 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 14:44:53.371 NotebookApp] Saving EDA_Testing.ipynb
+[I 14:46:53.349 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 14:46:53.351 NotebookApp] Saving EDA_Testing.ipynb
+[I 14:52:53.359 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 14:52:53.360 NotebookApp] Saving EDA_Testing.ipynb
+[I 14:54:53.348 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 14:54:53.350 NotebookApp] Saving EDA_Testing.ipynb
+[I 15:00:53.363 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 15:00:53.365 NotebookApp] Saving EDA_Testing.ipynb
+[I 15:02:53.353 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 15:02:53.354 NotebookApp] Saving EDA_Testing.ipynb
+[I 15:04:53.351 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 15:04:53.353 NotebookApp] Saving EDA_Testing.ipynb
+[I 15:12:53.354 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 15:12:53.356 NotebookApp] Saving EDA_Testing.ipynb
+[I 15:14:53.355 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 15:14:53.357 NotebookApp] Saving EDA_Testing.ipynb
+[I 15:16:53.356 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 15:16:53.357 NotebookApp] Saving EDA_Testing.ipynb
+[I 15:18:53.349 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 15:18:53.350 NotebookApp] Saving EDA_Testing.ipynb
+[I 15:20:53.361 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 15:20:53.363 NotebookApp] Saving EDA_Testing.ipynb
+[I 15:22:53.358 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 15:22:53.360 NotebookApp] Saving EDA_Testing.ipynb
+[I 15:24:27.311 NotebookApp] Kernel interrupted: d2e73d1f-c7b7-483d-87ea-e631939c1e7a
+[I 15:24:29.206 NotebookApp] Starting buffering for d2e73d1f-c7b7-483d-87ea-e631939c1e7a:0f2381119f04440a80e584808246d696
+[I 15:24:34.761 NotebookApp] Kernel restarted: d2e73d1f-c7b7-483d-87ea-e631939c1e7a
+[I 15:24:34.803 NotebookApp] Restoring connection for d2e73d1f-c7b7-483d-87ea-e631939c1e7a:0f2381119f04440a80e584808246d696
+[I 15:24:34.803 NotebookApp] Replaying 3 buffered messages
+[I 15:24:53.340 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 15:24:53.342 NotebookApp] Saving EDA_Testing.ipynb
+[I 15:26:53.351 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 15:26:53.353 NotebookApp] Saving EDA_Testing.ipynb
+[I 15:28:53.354 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 15:28:53.355 NotebookApp] Saving EDA_Testing.ipynb
+[I 15:30:53.357 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 15:30:53.359 NotebookApp] Saving EDA_Testing.ipynb
+[I 15:32:53.359 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 15:32:53.361 NotebookApp] Saving EDA_Testing.ipynb
+[I 15:34:53.359 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 15:34:53.361 NotebookApp] Saving EDA_Testing.ipynb
+[I 16:10:53.361 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 16:10:53.363 NotebookApp] Saving EDA_Testing.ipynb
+[I 16:12:53.358 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 16:12:53.360 NotebookApp] Saving EDA_Testing.ipynb
+[I 16:14:53.347 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 16:14:53.349 NotebookApp] Saving EDA_Testing.ipynb
+[I 16:18:53.364 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 16:18:53.365 NotebookApp] Saving EDA_Testing.ipynb
+[I 16:20:53.353 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 16:20:53.356 NotebookApp] Saving EDA_Testing.ipynb
+[I 16:22:53.360 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 16:22:53.361 NotebookApp] Saving EDA_Testing.ipynb
+[I 16:32:53.370 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 16:32:53.371 NotebookApp] Saving EDA_Testing.ipynb
+[I 16:34:53.379 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 16:34:53.381 NotebookApp] Saving EDA_Testing.ipynb
+[I 16:36:53.367 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 16:36:53.369 NotebookApp] Saving EDA_Testing.ipynb
+[I 16:38:53.359 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 16:38:53.361 NotebookApp] Saving EDA_Testing.ipynb
+[I 16:42:53.359 NotebookApp] Saving file at /EDA_Testing.ipynb
+[I 16:42:53.361 NotebookApp] Saving EDA_Testing.ipynb
+[I 17:39:32.571 NotebookApp] Creating new directory in 
+[I 17:40:57.839 NotebookApp] Kernel shutdown: 01a8a8d7-4d58-4d1f-803e-bf368de41253
+[I 17:41:03.858 NotebookApp] Starting buffering for d2e73d1f-c7b7-483d-87ea-e631939c1e7a:0f2381119f04440a80e584808246d696
+[W 17:41:04.175 NotebookApp] 404 DELETE /api/sessions/75334ac7-d75c-44da-ad7b-296b234bbd06 (::1): Session not found: session_id='75334ac7-d75c-44da-ad7b-296b234bbd06'
+[W 17:41:04.175 NotebookApp] Session not found: session_id='75334ac7-d75c-44da-ad7b-296b234bbd06'
+[W 17:41:04.176 NotebookApp] 404 DELETE /api/sessions/75334ac7-d75c-44da-ad7b-296b234bbd06 (::1) 338.68ms referer=http://localhost:8786/tree
+[I 17:41:04.522 NotebookApp] Kernel shutdown: d2e73d1f-c7b7-483d-87ea-e631939c1e7a
+[I 17:41:31.749 NotebookApp] Creating new directory in 
+[E 17:42:19.509 NotebookApp] Uncaught exception PATCH /api/contents/digiHitsOffsetArr.npy (::1)
+    HTTPServerRequest(protocol='http', host='localhost:8786', method='PATCH', uri='/api/contents/digiHitsOffsetArr.npy', version='HTTP/1.1', remote_ip='::1')
+    Traceback (most recent call last):
+      File "/opt/conda/lib/python3.6/site-packages/tornado/web.py", line 1704, in _execute
+        result = await result
+      File "/opt/conda/lib/python3.6/site-packages/tornado/gen.py", line 234, in wrapper
+        yielded = ctx_run(next, result)
+      File "/opt/conda/lib/python3.6/site-packages/tornado/gen.py", line 162, in _fake_ctx_run
+        return f(*args, **kw)
+      File "/opt/conda/lib/python3.6/site-packages/notebook/services/contents/handlers.py", line 125, in patch
+        model = yield maybe_future(cm.update(model, path))
+      File "/opt/conda/lib/python3.6/site-packages/notebook/services/contents/manager.py", line 296, in update
+        self.rename(path, new_path)
+      File "/opt/conda/lib/python3.6/site-packages/notebook/services/contents/manager.py", line 284, in rename
+        self.rename_file(old_path, new_path)
+      File "/opt/conda/lib/python3.6/site-packages/jupytext/contentsmanager.py", line 402, in rename_file
+        super(JupytextContentsManager, self).rename_file(old_path, new_path)
+      File "/opt/conda/lib/python3.6/site-packages/notebook/services/contents/filemanager.py", line 579, in rename_file
+        if os.path.exists(new_os_path) and not samefile(old_os_path, new_os_path):
+      File "/opt/conda/lib/python3.6/genericpath.py", line 96, in samefile
+        s1 = os.stat(f1)
+    FileNotFoundError: [Errno 2] No such file or directory: '/home/bhuckell/WatChMaL_analysis/digiHitsOffsetArr.npy'
+[W 17:42:20.486 NotebookApp] Unhandled error
+[E 17:42:20.488 NotebookApp] {
+      "Host": "localhost:8786",
+      "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:82.0) Gecko/20100101 Firefox/82.0",
+      "Accept": "application/json, text/javascript, */*; q=0.01",
+      "Accept-Language": "en-CA,en-US;q=0.7,en;q=0.3",
+      "Accept-Encoding": "gzip, deflate",
+      "Content-Type": "application/json",
+      "X-Xsrftoken": "2|a2a5012d|3b95afa1f1f26ec6b0b79b424c3dcccc|1610915774",
+      "X-Requested-With": "XMLHttpRequest",
+      "Content-Length": "42",
+      "Origin": "http://localhost:8786",
+      "Connection": "keep-alive",
+      "Referer": "http://localhost:8786/tree",
+      "Cookie": "_xsrf=2|a2a5012d|3b95afa1f1f26ec6b0b79b424c3dcccc|1610915774; username-localhost-8891=\"2|1:0|10:1611161972|23:username-localhost-8891|44:MmUwNWQ4OTVjNGY3NDQ4NDkxNjNkZDJjZmEzZmIyZDE=|ff2c289ae8974f0b607987f1697b9c85d02e8ceacbe1de4f930c7460709eb4c5\"; username-localhost-8848=\"2|1:0|10:1611634556|23:username-localhost-8848|44:OWQzMmFmNjA5ZTJiNDk0YzkzOWQ5NTRhM2Q0ZWYwOTA=|9152099f26a98a3de113598277e42d526d05c7f71e387240a64c748443bb687b\"; username-localhost-8786=\"2|1:0|10:1612117962|23:username-localhost-8786|44:NzQ2ZTQ3NTAyMDBlNGU2ZGI2N2UxODliNGJkYmEwYjU=|4f27f6ae4213adc05f8128d4aba34e33b2b9671bfe77532118797d38ac74e28f\""
+    }
+[E 17:42:20.488 NotebookApp] 500 PATCH /api/contents/digiHitsOffsetArr.npy (::1) 1043.61ms referer=http://localhost:8786/tree
+[E 17:42:20.491 NotebookApp] Uncaught exception PATCH /api/contents/trueHitsList.npy (::1)
+    HTTPServerRequest(protocol='http', host='localhost:8786', method='PATCH', uri='/api/contents/trueHitsList.npy', version='HTTP/1.1', remote_ip='::1')
+    Traceback (most recent call last):
+      File "/opt/conda/lib/python3.6/site-packages/tornado/web.py", line 1704, in _execute
+        result = await result
+      File "/opt/conda/lib/python3.6/site-packages/tornado/gen.py", line 234, in wrapper
+        yielded = ctx_run(next, result)
+      File "/opt/conda/lib/python3.6/site-packages/tornado/gen.py", line 162, in _fake_ctx_run
+        return f(*args, **kw)
+      File "/opt/conda/lib/python3.6/site-packages/notebook/services/contents/handlers.py", line 125, in patch
+        model = yield maybe_future(cm.update(model, path))
+      File "/opt/conda/lib/python3.6/site-packages/notebook/services/contents/manager.py", line 296, in update
+        self.rename(path, new_path)
+      File "/opt/conda/lib/python3.6/site-packages/notebook/services/contents/manager.py", line 284, in rename
+        self.rename_file(old_path, new_path)
+      File "/opt/conda/lib/python3.6/site-packages/jupytext/contentsmanager.py", line 402, in rename_file
+        super(JupytextContentsManager, self).rename_file(old_path, new_path)
+      File "/opt/conda/lib/python3.6/site-packages/notebook/services/contents/filemanager.py", line 579, in rename_file
+        if os.path.exists(new_os_path) and not samefile(old_os_path, new_os_path):
+      File "/opt/conda/lib/python3.6/genericpath.py", line 96, in samefile
+        s1 = os.stat(f1)
+    FileNotFoundError: [Errno 2] No such file or directory: '/home/bhuckell/WatChMaL_analysis/trueHitsList.npy'
+[W 17:42:20.491 NotebookApp] Unhandled error
+[E 17:42:20.495 NotebookApp] {
+      "Host": "localhost:8786",
+      "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:82.0) Gecko/20100101 Firefox/82.0",
+      "Accept": "application/json, text/javascript, */*; q=0.01",
+      "Accept-Language": "en-CA,en-US;q=0.7,en;q=0.3",
+      "Accept-Encoding": "gzip, deflate",
+      "Content-Type": "application/json",
+      "X-Xsrftoken": "2|a2a5012d|3b95afa1f1f26ec6b0b79b424c3dcccc|1610915774",
+      "X-Requested-With": "XMLHttpRequest",
+      "Content-Length": "37",
+      "Origin": "http://localhost:8786",
+      "Connection": "keep-alive",
+      "Referer": "http://localhost:8786/tree",
+      "Cookie": "_xsrf=2|a2a5012d|3b95afa1f1f26ec6b0b79b424c3dcccc|1610915774; username-localhost-8891=\"2|1:0|10:1611161972|23:username-localhost-8891|44:MmUwNWQ4OTVjNGY3NDQ4NDkxNjNkZDJjZmEzZmIyZDE=|ff2c289ae8974f0b607987f1697b9c85d02e8ceacbe1de4f930c7460709eb4c5\"; username-localhost-8848=\"2|1:0|10:1611634556|23:username-localhost-8848|44:OWQzMmFmNjA5ZTJiNDk0YzkzOWQ5NTRhM2Q0ZWYwOTA=|9152099f26a98a3de113598277e42d526d05c7f71e387240a64c748443bb687b\"; username-localhost-8786=\"2|1:0|10:1612117962|23:username-localhost-8786|44:NzQ2ZTQ3NTAyMDBlNGU2ZGI2N2UxODliNGJkYmEwYjU=|4f27f6ae4213adc05f8128d4aba34e33b2b9671bfe77532118797d38ac74e28f\""
+    }
+[E 17:42:20.496 NotebookApp] 500 PATCH /api/contents/trueHitsList.npy (::1) 1048.19ms referer=http://localhost:8786/tree
+[I 17:42:38.595 NotebookApp] Kernel started: b1ae9173-3928-40de-b986-6724f043b2ae, name: python3
+[I 17:42:39.549 NotebookApp] Kernel started: 2c68aaf4-6e34-416d-94c1-2e47a569a239, name: python3
+[I 17:44:37.689 NotebookApp] Saving file at /Capstone/EDA_Testing.ipynb
+[I 17:44:38.185 NotebookApp] Saving EDA_Testing.ipynb
+[E 17:44:39.515 NotebookApp] Error while saving file: Capstone/EDA_Testing.ipynb [Errno 28] No space left on device
+    Traceback (most recent call last):
+      File "/opt/conda/lib/python3.6/site-packages/notebook/services/contents/filemanager.py", line 476, in save
+        self._save_notebook(os_path, nb)
+      File "/opt/conda/lib/python3.6/site-packages/notebook/services/contents/fileio.py", line 290, in _save_notebook
+        with self.atomic_writing(os_path, encoding='utf-8') as f:
+      File "/opt/conda/lib/python3.6/contextlib.py", line 81, in __enter__
+        return next(self.gen)
+      File "/opt/conda/lib/python3.6/site-packages/notebook/services/contents/fileio.py", line 210, in atomic_writing
+        with atomic_writing(os_path, *args, log=self.log, **kwargs) as f:
+      File "/opt/conda/lib/python3.6/contextlib.py", line 81, in __enter__
+        return next(self.gen)
+      File "/opt/conda/lib/python3.6/site-packages/notebook/services/contents/fileio.py", line 100, in atomic_writing
+        copy2_safe(path, tmp_path, log=log)
+      File "/opt/conda/lib/python3.6/site-packages/notebook/services/contents/fileio.py", line 48, in copy2_safe
+        shutil.copyfile(src, dst)
+      File "/opt/conda/lib/python3.6/shutil.py", line 122, in copyfile
+        copyfileobj(fsrc, fdst)
+    OSError: [Errno 28] No space left on device
+--- Logging error ---
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/opt/conda/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+Call stack:
+  File "/opt/conda/bin/jupyter-notebook", line 8, in <module>
+    sys.exit(main())
+  File "/opt/conda/lib/python3.6/site-packages/jupyter_core/application.py", line 270, in launch_instance
+    return super(JupyterApp, cls).launch_instance(argv=argv, **kwargs)
+  File "/opt/conda/lib/python3.6/site-packages/traitlets/config/application.py", line 664, in launch_instance
+    app.start()
+  File "/opt/conda/lib/python3.6/site-packages/notebook/notebookapp.py", line 2262, in start
+    self.io_loop.start()
+  File "/opt/conda/lib/python3.6/site-packages/tornado/platform/asyncio.py", line 199, in start
+    self.asyncio_loop.run_forever()
+  File "/opt/conda/lib/python3.6/asyncio/base_events.py", line 442, in run_forever
+    self._run_once()
+  File "/opt/conda/lib/python3.6/asyncio/base_events.py", line 1462, in _run_once
+    handle._run()
+  File "/opt/conda/lib/python3.6/asyncio/events.py", line 145, in _run
+    self._callback(*self._args)
+  File "/opt/conda/lib/python3.6/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/opt/conda/lib/python3.6/site-packages/tornado/web.py", line 3173, in wrapper
+    return method(self, *args, **kwargs)
+  File "/opt/conda/lib/python3.6/site-packages/tornado/gen.py", line 250, in wrapper
+    runner = Runner(ctx_run, result, future, yielded)
+  File "/opt/conda/lib/python3.6/site-packages/tornado/gen.py", line 741, in __init__
+    self.ctx_run(self.run)
+  File "/opt/conda/lib/python3.6/site-packages/tornado/gen.py", line 162, in _fake_ctx_run
+    return f(*args, **kw)
+  File "/opt/conda/lib/python3.6/site-packages/tornado/gen.py", line 775, in run
+    yielded = self.gen.send(value)
+  File "/opt/conda/lib/python3.6/site-packages/notebook/services/contents/handlers.py", line 225, in put
+    yield maybe_future(self._save(model, path))
+  File "/opt/conda/lib/python3.6/site-packages/tornado/gen.py", line 234, in wrapper
+    yielded = ctx_run(next, result)
+  File "/opt/conda/lib/python3.6/site-packages/tornado/gen.py", line 162, in _fake_ctx_run
+    return f(*args, **kw)
+  File "/opt/conda/lib/python3.6/site-packages/notebook/services/contents/handlers.py", line 164, in _save
+    self.log.info(u"Saving file at %s", path)
+Message: 'Saving file at %s'
+Arguments: ('/Capstone/EDA_Testing.ipynb',)
+[I 17:46:37.615 NotebookApp] Saving EDA_Testing.ipynb
+--- Logging error ---
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.6/site-packages/notebook/services/contents/filemanager.py", line 475, in save
+    self.check_and_sign(nb, path)
+  File "/opt/conda/lib/python3.6/site-packages/notebook/services/contents/manager.py", line 492, in check_and_sign
+    self.notary.sign(nb)
+  File "/opt/conda/lib/python3.6/site-packages/nbformat/sign.py", line 449, in sign
+    self.store.store_signature(signature, self.algorithm)
+  File "/opt/conda/lib/python3.6/site-packages/nbformat/sign.py", line 211, in store_signature
+    """, (algorithm, digest, datetime.utcnow())
+sqlite3.OperationalError: database or disk is full
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.6/site-packages/jupytext/contentsmanager.py", line 167, in save
+    return write_pair(path, jupytext_formats, save_one_file)
+  File "/opt/conda/lib/python3.6/site-packages/jupytext/pairs.py", line 30, in write_pair
+    value = write_one_file(alt_path, fmt)
+  File "/opt/conda/lib/python3.6/site-packages/jupytext/contentsmanager.py", line 149, in save_one_file
+    return super(JupytextContentsManager, self).save(model, path)
+  File "/opt/conda/lib/python3.6/site-packages/notebook/services/contents/largefilemanager.py", line 46, in save
+    return super(LargeFileManager, self).save(model, path)
+  File "/opt/conda/lib/python3.6/site-packages/notebook/services/contents/filemanager.py", line 492, in save
+    (path, e)) from e
+tornado.web.HTTPError: HTTP 500: Internal Server Error (Unexpected error while saving file: Capstone/EDA_Testing.ipynb database or disk is full)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.6/site-packages/tornado/web.py", line 1704, in _execute
+    result = await result
+  File "/opt/conda/lib/python3.6/site-packages/tornado/gen.py", line 769, in run
+    yielded = self.gen.throw(*exc_info)  # type: ignore
+  File "/opt/conda/lib/python3.6/site-packages/notebook/services/contents/handlers.py", line 225, in put
+    yield maybe_future(self._save(model, path))
+  File "/opt/conda/lib/python3.6/site-packages/tornado/gen.py", line 762, in run
+    value = future.result()
+  File "/opt/conda/lib/python3.6/site-packages/tornado/gen.py", line 234, in wrapper
+    yielded = ctx_run(next, result)
+  File "/opt/conda/lib/python3.6/site-packages/tornado/gen.py", line 162, in _fake_ctx_run
+    return f(*args, **kw)
+  File "/opt/conda/lib/python3.6/site-packages/notebook/services/contents/handlers.py", line 165, in _save
+    model = yield maybe_future(self.contents_manager.save(model, path))
+  File "/opt/conda/lib/python3.6/site-packages/jupytext/contentsmanager.py", line 170, in save
+    raise HTTPError(400, str(err))
+tornado.web.HTTPError: HTTP 400: Bad Request (HTTP 500: Internal Server Error (Unexpected error while saving file: Capstone/EDA_Testing.ipynb database or disk is full))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/opt/conda/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+Call stack:
+  File "/opt/conda/bin/jupyter-notebook", line 8, in <module>
+    sys.exit(main())
+  File "/opt/conda/lib/python3.6/site-packages/jupyter_core/application.py", line 270, in launch_instance
+    return super(JupyterApp, cls).launch_instance(argv=argv, **kwargs)
+  File "/opt/conda/lib/python3.6/site-packages/traitlets/config/application.py", line 664, in launch_instance
+    app.start()
+  File "/opt/conda/lib/python3.6/site-packages/notebook/notebookapp.py", line 2262, in start
+    self.io_loop.start()
+  File "/opt/conda/lib/python3.6/site-packages/tornado/platform/asyncio.py", line 199, in start
+    self.asyncio_loop.run_forever()
+  File "/opt/conda/lib/python3.6/asyncio/base_events.py", line 442, in run_forever
+    self._run_once()
+  File "/opt/conda/lib/python3.6/asyncio/base_events.py", line 1462, in _run_once
+    handle._run()
+  File "/opt/conda/lib/python3.6/asyncio/events.py", line 145, in _run
+    self._callback(*self._args)
+  File "/opt/conda/lib/python3.6/site-packages/tornado/web.py", line 1709, in _execute
+    self._handle_request_exception(e)
+  File "/opt/conda/lib/python3.6/site-packages/tornado/web.py", line 1764, in _handle_request_exception
+    self.send_error(e.status_code, exc_info=sys.exc_info())
+  File "/opt/conda/lib/python3.6/site-packages/tornado/web.py", line 1217, in send_error
+    self.write_error(status_code, **kwargs)
+  File "/opt/conda/lib/python3.6/site-packages/notebook/base/handlers.py", line 614, in write_error
+    self.finish(json.dumps(reply))
+  File "/opt/conda/lib/python3.6/site-packages/notebook/base/handlers.py", line 656, in finish
+    return super(APIHandler, self).finish(*args, **kwargs)
+  File "/opt/conda/lib/python3.6/site-packages/tornado/web.py", line 1159, in finish
+    self._log()
+  File "/opt/conda/lib/python3.6/site-packages/tornado/web.py", line 1737, in _log
+    self.application.log_request(self)
+  File "/opt/conda/lib/python3.6/site-packages/tornado/web.py", line 2230, in log_request
+    self.settings["log_function"](handler)
+  File "/opt/conda/lib/python3.6/site-packages/notebook/log.py", line 49, in log_request
+    log_method(msg.format(**ns))
+Message: '400 PUT /api/contents/Capstone/EDA_Testing.ipynb (::1) 26.17ms referer=http://localhost:8786/notebooks/Capstone/EDA_Testing.ipynb'
+Arguments: ()
+[I 18:06:37.587 NotebookApp] Saving file at /Capstone/EDA_Testing.ipynb
+[I 18:06:37.589 NotebookApp] Saving EDA_Testing.ipynb
+[I 18:26:37.593 NotebookApp] Saving file at /Capstone/EDA_Testing.ipynb
+[I 18:26:37.595 NotebookApp] Saving EDA_Testing.ipynb
+[I 18:38:24.481 NotebookApp] Starting buffering for b1ae9173-3928-40de-b986-6724f043b2ae:f59c9b374eaf49078e748286c6804c71
+[I 18:38:26.330 NotebookApp] Starting buffering for 2c68aaf4-6e34-416d-94c1-2e47a569a239:84c9fb11473248ef809ea18cf7ac296c

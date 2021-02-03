@@ -1,0 +1,3 @@
+[submodule "WatChMaL"]
+	path = WatChMaL
+	url = https://github.com/WatChMaL/WatChMaL.git
