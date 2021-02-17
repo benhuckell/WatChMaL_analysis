@@ -370,3 +370,142 @@
     }
 [E 11:31:26.476 NotebookApp] 500 GET /nbconvert/latex/notebooks_EDA/EDA%20-%20Visualisation.ipynb?download=true (127.0.0.1) 498.17ms referer=http://127.0.0.1:8888/notebooks/notebooks_EDA/EDA%20-%20Visualisation.ipynb
 [I 11:32:58.239 NotebookApp] Starting buffering for 965a0fd4-ce62-4ea0-9d19-700ac524bc35:c979057ffe0a4aad82d1485acae9fed1
+[I 15:45:22.243 NotebookApp] 302 GET /?token=a78bb4ffc3b1deda37d0fcd435b210e5ca8b43c483550ef6 (127.0.0.1) 46.76ms
+[I 15:55:28.561 NotebookApp] Starting buffering for 965a0fd4-ce62-4ea0-9d19-700ac524bc35:7136c3e3d7684be6ad6270b3129ede12
+[I 17:52:09.134 NotebookApp] 302 GET /?token=a78bb4ffc3b1deda37d0fcd435b210e5ca8b43c483550ef6 (127.0.0.1) 5.18ms
+[I 18:23:41.529 NotebookApp] 302 GET /?token=a78bb4ffc3b1deda37d0fcd435b210e5ca8b43c483550ef6 (127.0.0.1) 31.54ms
+[I 18:25:59.913 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 18:25:59.928 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 18:26:41.268 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 18:26:41.269 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 18:30:00.319 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 18:30:00.320 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 18:33:40.087 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 18:33:40.088 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 18:33:58.717 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 18:33:58.719 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 18:34:09.204 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 18:34:09.206 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 18:36:00.619 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 18:36:00.620 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 18:37:26.812 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 18:37:26.814 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 18:37:32.683 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 18:37:32.684 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 18:37:59.110 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 18:37:59.112 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 18:39:59.863 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 18:39:59.864 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 18:41:58.193 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 18:41:58.195 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 18:42:33.756 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 18:42:33.757 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 18:42:58.737 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 18:42:58.739 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 18:43:44.505 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 18:43:44.506 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 18:43:58.173 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 18:43:58.175 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 18:44:32.770 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 18:44:32.771 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 18:44:48.373 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 18:44:48.374 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 18:44:52.361 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 18:44:52.362 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 18:46:00.956 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 18:46:00.958 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 18:49:54.356 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 18:49:54.357 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 18:49:58.000 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 18:49:58.002 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 18:51:15.407 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 18:51:15.408 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 18:51:58.304 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 18:51:58.305 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 18:53:59.607 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 18:53:59.608 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 18:55:58.008 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 18:55:58.009 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 18:57:21.057 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 18:57:21.058 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 18:57:25.641 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 18:57:25.642 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 18:57:59.600 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 18:57:59.601 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 18:59:43.106 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 18:59:43.108 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 19:00:00.700 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 19:00:00.701 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 19:00:38.898 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 19:00:38.899 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 19:02:00.703 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 19:02:00.704 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 19:04:01.106 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 19:04:01.107 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 19:04:24.545 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 19:04:24.546 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 19:26:00.163 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 19:26:00.164 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 19:26:31.952 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 19:26:31.953 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 19:28:00.147 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 19:28:00.148 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 19:28:12.487 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 19:28:12.488 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 19:28:21.403 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 19:28:21.404 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 19:30:01.195 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 19:30:01.196 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 19:42:47.247 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 19:42:47.249 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 19:44:00.157 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 19:44:00.158 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 19:46:37.393 NotebookApp] Starting buffering for 965a0fd4-ce62-4ea0-9d19-700ac524bc35:31e22e8923ec41c7a9181f60f7959404
+[I 15:33:23.211 NotebookApp] 302 GET /?token=a78bb4ffc3b1deda37d0fcd435b210e5ca8b43c483550ef6 (127.0.0.1) 37.70ms
+[I 15:34:00.267 NotebookApp] Starting buffering for 965a0fd4-ce62-4ea0-9d19-700ac524bc35:62da9846bba44e56905b393781233f23
+[I 15:34:28.238 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 15:34:28.239 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 15:36:04.738 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 15:36:04.754 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 15:44:42.084 NotebookApp] Starting buffering for 965a0fd4-ce62-4ea0-9d19-700ac524bc35:147c5d7cdf874a099f564affaf5079b5
+[I 16:10:21.764 NotebookApp] 302 GET /?token=a78bb4ffc3b1deda37d0fcd435b210e5ca8b43c483550ef6 (127.0.0.1) 14.15ms
+[I 18:43:51.257 NotebookApp] Starting buffering for 965a0fd4-ce62-4ea0-9d19-700ac524bc35:ed0a9fe845604d5db90c43abd9fbdb3c
+[I 13:56:45.253 NotebookApp] 302 GET / (::1) 44.72ms
+[I 13:56:45.320 NotebookApp] 302 GET /tree? (::1) 22.50ms
+[W 14:13:50.274 NotebookApp] 401 POST /login?next=%2Ftree%3F (::1) 10.04ms referer=http://localhost:8888/login?next=%2Ftree%3F
+[W 14:14:52.551 NotebookApp] 401 POST /login?next=%2Ftree%3F (::1) 3.28ms referer=http://localhost:8888/login?next=%2Ftree%3F
+[W 14:14:54.003 NotebookApp] 401 POST /login?next=%2Ftree%3F (::1) 2.78ms referer=http://localhost:8888/login?next=%2Ftree%3F
+[I 14:37:05.240 NotebookApp] 302 GET / (::1) 5.84ms
+[I 14:37:05.297 NotebookApp] 302 GET /tree? (::1) 0.71ms
+[W 14:42:32.144 NotebookApp] 401 POST /login?next=%2Ftree%3F (::1) 1.93ms referer=http://localhost:8890/login?next=%2Ftree%3F
+[I 14:42:49.291 NotebookApp] 302 GET / (::1) 0.56ms
+[I 14:42:49.339 NotebookApp] 302 GET /tree? (::1) 0.74ms
+[I 14:47:11.551 NotebookApp] 302 GET / (::1) 1.10ms
+[I 14:47:11.605 NotebookApp] 302 GET /tree? (::1) 1.26ms
+[W 14:47:13.638 NotebookApp] 401 POST /login?next=%2Ftree%3F (::1) 2.75ms referer=http://localhost:8890/login?next=%2Ftree%3F
+[W 14:47:15.667 NotebookApp] 401 POST /login?next=%2Ftree%3F (::1) 2.70ms referer=http://localhost:8890/login?next=%2Ftree%3F
+[W 14:48:13.020 NotebookApp] 401 POST /login?next=%2Ftree%3F (::1) 3.22ms referer=http://localhost:8890/login?next=%2Ftree%3F
+[W 14:48:16.472 NotebookApp] 401 POST /login?next=%2Ftree%3F (::1) 2.80ms referer=http://localhost:8890/login?next=%2Ftree%3F
+[I 14:58:22.907 NotebookApp] 302 GET / (::1) 1.01ms
+[I 14:58:22.954 NotebookApp] 302 GET /tree? (::1) 1.41ms
+[W 14:58:38.721 NotebookApp] 401 POST /login?next=%2Ftree%3F (::1) 3.21ms referer=http://localhost:8888/login?next=%2Ftree%3F
+[I 15:01:49.822 NotebookApp] 302 GET / (::1) 1.00ms
+[I 15:01:49.861 NotebookApp] 302 GET /tree? (::1) 1.15ms
+[W 15:01:53.227 NotebookApp] 401 POST /login?next=%2Ftree%3F (::1) 3.19ms referer=http://localhost:8890/login?next=%2Ftree%3F
+[W 15:02:05.247 NotebookApp] 401 POST /login?next=%2Ftree%3F (::1) 3.23ms referer=http://localhost:8890/login?next=%2Ftree%3F
+[I 09:45:18.070 NotebookApp] 302 GET /?token=a78bb4ffc3b1deda37d0fcd435b210e5ca8b43c483550ef6 (127.0.0.1) 1.31ms
+[I 09:46:30.469 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 09:46:30.474 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 09:47:28.283 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 09:47:28.284 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 09:47:32.606 NotebookApp] Kernel interrupted: 965a0fd4-ce62-4ea0-9d19-700ac524bc35
+[I 09:47:49.790 NotebookApp] Starting buffering for 965a0fd4-ce62-4ea0-9d19-700ac524bc35:a7b4a48c99ff4ec38bf1a3c26946aa57
+[I 09:47:51.133 NotebookApp] Kernel restarted: 965a0fd4-ce62-4ea0-9d19-700ac524bc35
+[I 09:47:51.437 NotebookApp] Restoring connection for 965a0fd4-ce62-4ea0-9d19-700ac524bc35:a7b4a48c99ff4ec38bf1a3c26946aa57
+[I 09:47:51.437 NotebookApp] Replaying 3 buffered messages
+[I 09:48:12.020 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 09:48:12.022 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 09:50:18.120 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 09:50:18.121 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 09:52:22.915 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 09:52:22.916 NotebookApp] Saving EDA - Visualisation.ipynb
