@@ -1,0 +1,7 @@
+torch
+hydra-core>=1.0.0
+pytorch-lightning
+tqdm
+omegaconf
+h5py
+numpy
