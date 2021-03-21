@@ -509,3 +509,14 @@
 [I 09:50:18.121 NotebookApp] Saving EDA - Visualisation.ipynb
 [I 09:52:22.915 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
 [I 09:52:22.916 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 10:27:23.422 NotebookApp] Starting buffering for 965a0fd4-ce62-4ea0-9d19-700ac524bc35:a7b4a48c99ff4ec38bf1a3c26946aa57
+[I 22:13:49.461 NotebookApp] 302 GET /?token=a78bb4ffc3b1deda37d0fcd435b210e5ca8b43c483550ef6 (127.0.0.1) 49.96ms
+[I 22:16:09.572 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 22:16:09.575 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 22:21:04.119 NotebookApp] Starting buffering for 965a0fd4-ce62-4ea0-9d19-700ac524bc35:3f6649f916234c3a84268104cb04de36
+[I 17:24:06.100 NotebookApp] 302 GET /?token=a78bb4ffc3b1deda37d0fcd435b210e5ca8b43c483550ef6 (127.0.0.1) 66.58ms
+[I 17:34:26.390 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 17:34:26.392 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 17:38:25.991 NotebookApp] Saving file at /notebooks_EDA/EDA - Visualisation.ipynb
+[I 17:38:25.992 NotebookApp] Saving EDA - Visualisation.ipynb
+[I 19:20:28.772 NotebookApp] Starting buffering for 965a0fd4-ce62-4ea0-9d19-700ac524bc35:b7911437d40c4c78861940ce13f4e023
