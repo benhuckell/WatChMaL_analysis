@@ -1,2 +1,0 @@
-# @package _group_._name_
-_target_: torch.utils.data.sampler.SubsetRandomSampler
