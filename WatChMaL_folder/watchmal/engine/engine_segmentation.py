@@ -105,15 +105,24 @@ class ClassifierEngine:
             self.labels = self.labels.to(self.device)
 
             model_out = self.model(self.data)
+            
 
-            print("Model Output size:", model_out.shape)
-            print("Labels Tensor size:", self.labels.shape)
+            #print("Model Output size:", model_out.shape)
+            #print(model_out[0,:,0,0])
+            #print("Labels Tensor size:", self.labels.shape)
+            #print(torch.count_nonzero(self.labels))
+            #print(torch.unique(self.labels))
 
-            self.loss = self.criterion(model_out, self.labels)
+            self.loss = self.criterion(model_out.float(), self.labels)
+
+            #print("Total Loss:", self.loss)
+            
             
             softmax          = self.softmax(model_out)
-            predicted_labels = torch.argmax(model_out,dim=-1)
+            predicted_labels = torch.argmax(model_out,dim=1)
+            #print("Predicted Labels:",predicted_labels)
             accuracy         = (predicted_labels == self.labels).sum().item() / float(predicted_labels.nelement())
+            #accuracy = 1.0
         
         return {'loss'             : self.loss.detach().cpu().item(),
                 'predicted_labels' : predicted_labels.detach().cpu().numpy(),
@@ -188,12 +197,12 @@ class ClassifierEngine:
             # local training loop for batches in a single epoch
             for i, train_data in enumerate(self.data_loaders["train"]):
 
-                print("Data:",i,train_data["event_ids"].shape)
-                print("Data:", i, train_data["labels"].shape)
-                print("Data:", i, train_data["data"].shape)
+                #print("Event IDs:",i,train_data["event_ids"].shape)
+                #print("Labels:", i, train_data["segmentation"].shape)
+                #print("Data:", i, train_data["data"].shape)
                 
                 # run validation on given intervals
-                if self.iteration % val_interval == 0:
+                if self.iteration % val_interval == 2:
                     # set model to eval mode
                     self.model.eval()
 
@@ -209,7 +218,7 @@ class ClassifierEngine:
                         
                         # extract the event data from the input data tuple
                         self.data      = val_data['data'].float()
-                        self.labels    = val_data['labels'].long()
+                        self.labels    = val_data['segmentation'].long()
                         self.energies  = val_data['energies'].float()
                         self.angles    = val_data['angles'].float()
                         self.event_ids = val_data['event_ids'].float()
@@ -260,7 +269,7 @@ class ClassifierEngine:
                 
                 # Train on batch
                 self.data      = train_data['data'].float()
-                self.labels    = train_data['labels'].long()
+                self.labels    = train_data['segmentation'].long()
                 self.energies  = train_data['energies'].float()
                 self.angles    = train_data['angles'].float()
                 self.event_ids = train_data['event_ids'].float()
@@ -272,7 +281,7 @@ class ClassifierEngine:
                 self.backward()
 
                 # update the epoch and iteration
-                print(self.data_loaders["train"])
+                #print(self.data_loaders["train"])
                 epoch          += 1./len(self.data_loaders["train"])
                 self.iteration += 1
                 

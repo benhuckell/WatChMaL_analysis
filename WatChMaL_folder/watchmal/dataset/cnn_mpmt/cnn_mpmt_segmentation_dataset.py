@@ -11,13 +11,16 @@ from torch.utils.data import Dataset
 # generic imports
 import numpy as np
 import pickle
+from scipy import stats
 
 # WatChMaL imports
 from watchmal.dataset.h5_dataset import H5TrueDataset
 import watchmal.dataset.data_utils as du
 
+
+
 class CNNmPMTSegmentationDataset(Dataset):
-    def __init__(self, digi_dataset_config, true_hits_h5file, digi_truth_mapping_file, valid_parents=(-1, 2, 3),
+    def __init__(self, digi_dataset_config, true_hits_h5file, digi_truth_mapping_file, valid_parents=(1, 2, 3),
                  parent_type="max", transform_segmentation = True):
         """
         Args:
@@ -77,7 +80,7 @@ class CNNmPMTSegmentationDataset(Dataset):
         digi_hit_parent = self.valid_parents[count_argmax]
         # replace with -2 for any digi hits with equal max count of more than one parent
         count_max = digi_hit_parent_count[count_argmax, np.arange(len(count_argmax))]
-        digi_hit_parent[np.where(np.count_nonzero(digi_hit_parent_count==count_max, axis=0)>1)] = -2
+        digi_hit_parent[np.where(np.count_nonzero(digi_hit_parent_count==count_max, axis=0)>1)] = 2 #TEMPORARY CHANGE, USED TO BE -2
         return digi_hit_parent
 
     def __getitem__(self, item):
@@ -94,6 +97,11 @@ class CNNmPMTSegmentationDataset(Dataset):
             data, segmentation = du.apply_random_transformations(self.transforms, data_dict["data"], segmentation)
             data_dict["data"] = data
 
-        data_dict["segmentation"] = segmentation
+        #Find max over 19 channels, remove dimension
+        segmentation = np.squeeze(stats.mode(segmentation, axis=0).mode)
+
+        #segmentation = {k: stats.mode(v,axis=0).mode for k, v in segmentation.items()}
+
+        data_dict["segmentation"] = segmentation #this is a dict of np arrays of shape (19,40,40)
 
         return data_dict    

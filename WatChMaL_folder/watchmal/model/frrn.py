@@ -19,7 +19,7 @@ frrn_specs_dic = {
 class frrn(nn.Module):
 
 
-    def __init__(self, n_classes=3, model_type="B", group_norm=False, n_groups=16):
+    def __init__(self, n_classes=4, model_type="B", group_norm=False, n_groups=16):
 
         print('YESSIR')
 
@@ -113,6 +113,8 @@ class frrn(nn.Module):
             48, self.n_classes, kernel_size=1, padding=0, stride=1, bias=True
         )
 
+        self.activationFunction = nn.ReLU(inplace=False)
+
     def forward(self, x):
 
         # pass to initial conv
@@ -126,8 +128,8 @@ class frrn(nn.Module):
         y = x
         z = self.split_conv(x)
 
-        print("Model Shape:", z.shape)
-        print("Model Shape x:", x.shape)
+        #print("Model Shape:", z.shape)
+        #print("Model Shape x:", x.shape)
 
         prev_channels = 48
         '''
@@ -167,5 +169,8 @@ class frrn(nn.Module):
 
         # final 1x1 conv to get classification
         x = self.classif_conv(x)
+
+        #Activation function - ReLU
+        x = self.activationFunction(x)
 
         return x
