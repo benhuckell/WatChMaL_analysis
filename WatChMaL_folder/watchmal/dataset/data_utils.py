@@ -74,8 +74,6 @@ def get_segmentation_data_loader(dataset, batch_size, sampler, num_workers, is_d
     Returns: dataloader created with instantiated dataset and (possibly wrapped) sampler
     """
     dataset = instantiate(dataset, transform_segmentation=transforms)
-
-    print("Sampler:",sampler)
     
     if split_path is not None and split_key is not None:
         split_indices = np.load(split_path, allow_pickle=True)[split_key]
