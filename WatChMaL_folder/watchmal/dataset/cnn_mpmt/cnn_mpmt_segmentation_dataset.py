@@ -98,10 +98,10 @@ class CNNmPMTSegmentationDataset(Dataset):
             data_dict["data"] = data
 
         #Find max over 19 channels, remove dimension
-        segmentation = np.squeeze(stats.mode(segmentation, axis=0).mode)
+        #segmentation = np.squeeze(stats.mode(segmentation, axis=0).mode) # shape (40,40)
 
         #segmentation = {k: stats.mode(v,axis=0).mode for k, v in segmentation.items()}
 
-        data_dict["segmentation"] = segmentation #this is a dict of np arrays of shape (19,40,40)
+        data_dict["segmented_labels"] = segmentation #this is a dict of np arrays of shape (19,40,40)
 
         return data_dict    

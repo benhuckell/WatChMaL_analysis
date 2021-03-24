@@ -101,10 +101,13 @@ class ClassifierEngine:
 
         with torch.set_grad_enabled(train):
             # Move the data and the labels to the GPU (if using CPU this has no effect)
-            self.data = self.data.to(self.device)
+            self.data = self.data.to(self.device) #shape (batch_size, 19, 40, 40)
             self.labels = self.labels.to(self.device)
 
-            model_out = self.model(self.data)
+            #print("Model Input size:", self.data.shape)
+            #print("Labels Tensor size:", self.labels.shape)
+
+            model_out = self.model(self.data) #predictions are generated, shape (batch_size, # classes, 40, 40)
             
 
             #print("Model Output size:", model_out.shape)
@@ -121,15 +124,19 @@ class ClassifierEngine:
             softmax          = self.softmax(model_out)
             predicted_labels = torch.argmax(model_out,dim=1)
             #print("Predicted Labels:",predicted_labels)
-            accuracy         = (predicted_labels == self.labels).sum().item() / float(predicted_labels.nelement())
+            #accuracy         = (predicted_labels == self.labels).sum().item() / float(predicted_labels.nelement())
             #accuracy = 1.0
+
+            correctlyIdentified = ((predicted_labels == self.labels) & (self.labels != 0)).sum().item()
+            total = (self.labels != 0).sum().item()
+            accuracy = correctlyIdentified/total
         
         return {'loss'             : self.loss.detach().cpu().item(),
                 'predicted_labels' : predicted_labels.detach().cpu().numpy(),
                 'softmax'          : softmax.detach().cpu().numpy(),
                 'accuracy'         : accuracy,
                 'raw_pred_labels'  : model_out}
-    
+
     def backward(self):
         self.optimizer.zero_grad()  # reset accumulated gradient
         self.loss.backward()        # compute new gradient
@@ -218,7 +225,8 @@ class ClassifierEngine:
                         
                         # extract the event data from the input data tuple
                         self.data      = val_data['data'].float()
-                        self.labels    = val_data['segmentation'].long()
+                        self.data = torch.unsqueeze(self.data,1)
+                        self.labels    = val_data['segmented_labels'].long()
                         self.energies  = val_data['energies'].float()
                         self.angles    = val_data['angles'].float()
                         self.event_ids = val_data['event_ids'].float()
@@ -269,7 +277,8 @@ class ClassifierEngine:
                 
                 # Train on batch
                 self.data      = train_data['data'].float()
-                self.labels    = train_data['segmentation'].long()
+                self.data = torch.unsqueeze(self.data,1)
+                self.labels    = train_data['segmented_labels'].long()
                 self.energies  = train_data['energies'].float()
                 self.angles    = train_data['angles'].float()
                 self.event_ids = train_data['event_ids'].float()
@@ -466,7 +475,7 @@ class ClassifierEngine:
         """
         filename = "{}{}{}{}".format(self.dirpath,
                                      str(self.model._get_name()),
-                                     ("BEST" if best else ""),
+                                     ("BEST3d" if best else ""),
                                      ".pth")
         
         # Save model state dict in appropriate from depending on number of gpus

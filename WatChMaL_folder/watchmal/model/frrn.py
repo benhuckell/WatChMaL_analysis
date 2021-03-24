@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from watchmal.utils.frrn_utils import FRRU, RU, conv2DBatchNormRelu, conv2DGroupNormRelu
+from watchmal.utils.frrn_utils import FRRU, RU, conv2DBatchNormRelu, conv2DGroupNormRelu, conv3DBatchNormRelu, conv3DGroupNormRelu
 
 frrn_specs_dic = {
     "A": {
@@ -30,9 +30,9 @@ class frrn(nn.Module):
         self.n_groups = n_groups
 
         if self.group_norm:
-            self.conv1 = conv2DGroupNormRelu(19, 48, 5, 1, 2)
+            self.conv1 = conv3DGroupNormRelu(1, 10, 5, 1, 2)
         else:
-            self.conv1 = conv2DBatchNormRelu(19, 48, 5, 1, 2)
+            self.conv1 = conv3DBatchNormRelu(1, 10, 5, 1, 2)
 
         self.up_residual_units = []
         self.down_residual_units = []
@@ -61,12 +61,15 @@ class frrn(nn.Module):
 
         self.split_conv = nn.Conv2d(48, 32, kernel_size=1, padding=0, stride=1, bias=False)
 
+        prev_channels = 80
+
+        '''
         # each spec is as (n_blocks, channels, scale)
         self.encoder_frru_specs = frrn_specs_dic[self.model_type]["encoder"]
 
         self.decoder_frru_specs = frrn_specs_dic[self.model_type]["decoder"]
-        prev_channels = 80
-        '''
+        
+        
         # encoding
         
         self.encoding_frrus = {}
@@ -113,6 +116,10 @@ class frrn(nn.Module):
             48, self.n_classes, kernel_size=1, padding=0, stride=1, bias=True
         )
 
+        self.classif_conv_3d = nn.Conv3d(
+            10, self.n_classes, kernel_size=1, padding=0, stride=1, bias=True
+        )
+
         self.activationFunction = nn.ReLU(inplace=False)
 
     def forward(self, x):
@@ -120,6 +127,7 @@ class frrn(nn.Module):
         # pass to initial conv
         x = self.conv1(x)
 
+        '''
         # pass through residual units
         for i in range(3):
             x = self.up_residual_units[i](x)
@@ -132,6 +140,7 @@ class frrn(nn.Module):
         #print("Model Shape x:", x.shape)
 
         prev_channels = 48
+        '''
         '''
         # encoding
         for n_blocks, channels, scale in self.encoder_frru_specs:
@@ -157,6 +166,7 @@ class frrn(nn.Module):
                 # print("Outgoing FRRU Size: ", key, y.shape, z.shape)
             prev_channels = channels
         '''
+        '''
         # merge streams
         x = torch.cat(
             [F.upsample(y, scale_factor=1, mode="bilinear", align_corners=True), z], dim=1
@@ -166,11 +176,12 @@ class frrn(nn.Module):
         # pass through residual units
         for i in range(3):
             x = self.down_residual_units[i](x)
-
+        '''
         # final 1x1 conv to get classification
-        x = self.classif_conv(x)
+        x = self.classif_conv_3d(x)
 
         #Activation function - ReLU
         x = self.activationFunction(x)
+        
 
         return x

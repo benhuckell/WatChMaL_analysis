@@ -119,6 +119,40 @@ class conv2DBatchNormRelu(nn.Module):
         outputs = self.cbr_unit(inputs)
         return outputs
 
+class conv3DBatchNormRelu(nn.Module):
+    def __init__(
+        self,
+        in_channels,
+        n_filters,
+        k_size,
+        stride,
+        padding,
+        bias=True,
+        dilation=1,
+        is_batchnorm=True,
+    ):
+        super(conv3DBatchNormRelu, self).__init__()
+
+        conv_mod = nn.Conv3d(
+            int(in_channels),
+            int(n_filters),
+            kernel_size=k_size,
+            padding=padding,
+            stride=stride,
+            bias=bias,
+            dilation=dilation,
+        )
+
+        if is_batchnorm:
+            self.cbr_unit = nn.Sequential(
+                conv_mod, nn.BatchNorm3d(int(n_filters)), nn.ReLU(inplace=True)
+            )
+        else:
+            self.cbr_unit = nn.Sequential(conv_mod, nn.ReLU(inplace=True))
+
+    def forward(self, inputs):
+        outputs = self.cbr_unit(inputs)
+        return outputs
 
 class conv2DGroupNormRelu(nn.Module):
     def __init__(
@@ -127,6 +161,30 @@ class conv2DGroupNormRelu(nn.Module):
         super(conv2DGroupNormRelu, self).__init__()
 
         conv_mod = nn.Conv2d(
+            int(in_channels),
+            int(n_filters),
+            kernel_size=k_size,
+            padding=padding,
+            stride=stride,
+            bias=bias,
+            dilation=dilation,
+        )
+
+        self.cgr_unit = nn.Sequential(
+            conv_mod, nn.GroupNorm(n_groups, int(n_filters)), nn.ReLU(inplace=True)
+        )
+
+    def forward(self, inputs):
+        outputs = self.cgr_unit(inputs)
+        return outputs
+
+class conv3DGroupNormRelu(nn.Module):
+    def __init__(
+        self, in_channels, n_filters, k_size, stride, padding, bias=True, dilation=1, n_groups=16
+    ):
+        super(conv3DGroupNormRelu, self).__init__()
+
+        conv_mod = nn.Conv3d(
             int(in_channels),
             int(n_filters),
             kernel_size=k_size,
