@@ -2,5 +2,5 @@
 data_loaders:
   test:
     split_key: test_idxs
-    batch_size: 512
+    batch_size: 128
     num_workers: 4

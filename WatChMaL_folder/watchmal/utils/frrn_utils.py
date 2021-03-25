@@ -6,7 +6,8 @@ import torch.nn.functional as F
 from torch.autograd import Variable
 
 
-class conv2DBatchNorm(nn.Module):
+
+class conv3DBatchNorm(nn.Module):
     def __init__(
         self,
         in_channels,
@@ -18,9 +19,9 @@ class conv2DBatchNorm(nn.Module):
         dilation=1,
         is_batchnorm=True,
     ):
-        super(conv2DBatchNorm, self).__init__()
+        super(conv3DBatchNorm, self).__init__()
 
-        conv_mod = nn.Conv2d(
+        conv_mod = nn.Conv3d(
             int(in_channels),
             int(n_filters),
             kernel_size=k_size,
@@ -31,7 +32,7 @@ class conv2DBatchNorm(nn.Module):
         )
 
         if is_batchnorm:
-            self.cb_unit = nn.Sequential(conv_mod, nn.BatchNorm2d(int(n_filters)))
+            self.cb_unit = nn.Sequential(conv_mod, nn.BatchNorm3d(int(n_filters)))
         else:
             self.cb_unit = nn.Sequential(conv_mod)
 
@@ -40,13 +41,13 @@ class conv2DBatchNorm(nn.Module):
         return outputs
 
 
-class conv2DGroupNorm(nn.Module):
+class conv3DGroupNorm(nn.Module):
     def __init__(
         self, in_channels, n_filters, k_size, stride, padding, bias=True, dilation=1, n_groups=16
     ):
-        super(conv2DGroupNorm, self).__init__()
+        super(conv3DGroupNorm, self).__init__()
 
-        conv_mod = nn.Conv2d(
+        conv_mod = nn.Conv3d(
             int(in_channels),
             int(n_filters),
             kernel_size=k_size,
@@ -84,41 +85,6 @@ class deconv2DBatchNorm(nn.Module):
         return outputs
 
 
-class conv2DBatchNormRelu(nn.Module):
-    def __init__(
-        self,
-        in_channels,
-        n_filters,
-        k_size,
-        stride,
-        padding,
-        bias=True,
-        dilation=1,
-        is_batchnorm=True,
-    ):
-        super(conv2DBatchNormRelu, self).__init__()
-
-        conv_mod = nn.Conv2d(
-            int(in_channels),
-            int(n_filters),
-            kernel_size=k_size,
-            padding=padding,
-            stride=stride,
-            bias=bias,
-            dilation=dilation,
-        )
-
-        if is_batchnorm:
-            self.cbr_unit = nn.Sequential(
-                conv_mod, nn.BatchNorm2d(int(n_filters)), nn.ReLU(inplace=True)
-            )
-        else:
-            self.cbr_unit = nn.Sequential(conv_mod, nn.ReLU(inplace=True))
-
-    def forward(self, inputs):
-        outputs = self.cbr_unit(inputs)
-        return outputs
-
 class conv3DBatchNormRelu(nn.Module):
     def __init__(
         self,
@@ -154,29 +120,6 @@ class conv3DBatchNormRelu(nn.Module):
         outputs = self.cbr_unit(inputs)
         return outputs
 
-class conv2DGroupNormRelu(nn.Module):
-    def __init__(
-        self, in_channels, n_filters, k_size, stride, padding, bias=True, dilation=1, n_groups=16
-    ):
-        super(conv2DGroupNormRelu, self).__init__()
-
-        conv_mod = nn.Conv2d(
-            int(in_channels),
-            int(n_filters),
-            kernel_size=k_size,
-            padding=padding,
-            stride=stride,
-            bias=bias,
-            dilation=dilation,
-        )
-
-        self.cgr_unit = nn.Sequential(
-            conv_mod, nn.GroupNorm(n_groups, int(n_filters)), nn.ReLU(inplace=True)
-        )
-
-    def forward(self, inputs):
-        outputs = self.cgr_unit(inputs)
-        return outputs
 
 class conv3DGroupNormRelu(nn.Module):
     def __init__(
@@ -420,12 +363,10 @@ class FRRU(nn.Module):
         self.group_norm = group_norm
         self.n_groups = n_groups
 
-        addFactor = 32 #dont know if this is what to do
-
         if self.group_norm:
-            conv_unit = conv2DGroupNormRelu
+            conv_unit = conv3DGroupNormRelu
             self.conv1 = conv_unit(
-                prev_channels,
+                prev_channels + 4,
                 out_channels,
                 k_size=3,
                 stride=1,
@@ -444,23 +385,28 @@ class FRRU(nn.Module):
             )
 
         else:
-            conv_unit = conv2DBatchNormRelu
+            conv_unit = conv3DBatchNormRelu
             self.conv1 = conv_unit(
-                prev_channels, out_channels, k_size=3, stride=1, padding=1, bias=False
+                prev_channels + 4, out_channels, k_size=(19,3,3), stride=1, padding=(9,1,1), bias=False
             )
             self.conv2 = conv_unit(
-                out_channels, out_channels, k_size=3, stride=1, padding=1, bias=False
+                out_channels, out_channels, k_size=(19,3,3), stride=1, padding=(9,1,1), bias=False
             )
 
-        self.conv_res = nn.Conv2d(out_channels, out_channels, kernel_size=1, stride=1, padding=0)
+        self.conv_res = nn.Conv3d(out_channels, 4, kernel_size=(19,1,1), stride=1, padding=(9,0,0))
 
     def forward(self, y, z):
-        x = torch.cat([y, nn.MaxPool2d(self.scale, self.scale)(z)], dim=1)
+        x = torch.cat([y, nn.MaxPool3d(self.scale, self.scale)(z)], dim=1)
         y_prime = self.conv1(x)
         y_prime = self.conv2(y_prime)
 
         x = self.conv_res(y_prime)
-        upsample_size = torch.Size([_s * self.scale for _s in y_prime.shape[-2:]])
+        #print("Test size:", y_prime.shape)
+
+        scaleFactorTensor = torch.tensor(np.asarray(self.scale))
+        upsample_size = torch.Size([dimShape * dimScale for dimShape, dimScale in zip(y_prime.shape[2:],scaleFactorTensor)])
+        #upsample_size = (torch.tensor(np.asarray(scale_factor)) * y_prime.shape[2:]).shape
+        #print("upsample:", upsample_size)
         x = F.upsample(x, size=upsample_size, mode="nearest")
         z_prime = z + x
 
@@ -472,37 +418,37 @@ class RU(nn.Module):
     Residual Unit for FRRN
     """
 
-    def __init__(self, channels, kernel_size=3, strides=1, group_norm=False, n_groups=None):
+    def __init__(self, channels, kernel_size=1, padding = 0, strides=1, group_norm=False, n_groups=None):
         super(RU, self).__init__()
         self.group_norm = group_norm
         self.n_groups = n_groups
 
         if self.group_norm:
-            self.conv1 = conv2DGroupNormRelu(
+            self.conv1 = conv3DGroupNormRelu(
                 channels,
                 channels,
                 k_size=kernel_size,
                 stride=strides,
-                padding=1,
+                padding=padding,
                 bias=False,
                 n_groups=self.n_groups,
             )
-            self.conv2 = conv2DGroupNorm(
+            self.conv2 = conv3DGroupNorm(
                 channels,
                 channels,
                 k_size=kernel_size,
                 stride=strides,
-                padding=1,
+                padding=padding,
                 bias=False,
                 n_groups=self.n_groups,
             )
 
         else:
-            self.conv1 = conv2DBatchNormRelu(
-                channels, channels, k_size=kernel_size, stride=strides, padding=1, bias=False
+            self.conv1 = conv3DBatchNormRelu(
+                channels, channels, k_size=kernel_size, stride=strides, padding=padding, bias=False
             )
-            self.conv2 = conv2DBatchNorm(
-                channels, channels, k_size=kernel_size, stride=strides, padding=1, bias=False
+            self.conv2 = conv3DBatchNorm(
+                channels, channels, k_size=kernel_size, stride=strides, padding=padding, bias=False
             )
 
     def forward(self, x):
