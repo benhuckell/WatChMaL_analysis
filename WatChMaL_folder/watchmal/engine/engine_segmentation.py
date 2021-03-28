@@ -18,6 +18,8 @@ from time import strftime, localtime, time
 import sys
 from sys import stdout
 import copy
+import matplotlib.pyplot as plt
+from matplotlib.colors import ListedColormap
 
 # WatChMaL imports
 from watchmal.dataset.data_utils import get_segmentation_data_loader
@@ -47,7 +49,9 @@ class ClassifierEngine:
 
         self.data_loaders = {}
 
-        self.criterion = nn.CrossEntropyLoss()
+        self.mpmt_positions = None
+
+        self.criterion = nn.CrossEntropyLoss(reduction = "none")
         self.softmax = nn.Softmax(dim=1)
 
         # define the placeholder attributes
@@ -76,7 +80,7 @@ class ClassifierEngine:
         Set up data loaders from loaders config
         """
         for name, loader_config in loaders_config.items():
-            self.data_loaders[name] = get_segmentation_data_loader(**data_config, **loader_config, is_distributed=is_distributed, seed=seed)
+            self.data_loaders[name], self.mpmt_positions = get_segmentation_data_loader(**data_config, **loader_config, is_distributed=is_distributed, seed=seed)
     
     def get_synchronized_metrics(self, metric_dict):
         global_metric_dict = {}
@@ -116,20 +120,42 @@ class ClassifierEngine:
             #print(torch.count_nonzero(self.labels))
             #print(torch.unique(self.labels))
 
-            self.loss = self.criterion(model_out.float(), self.labels)
+            #Calculate first loss
+            regLoss = torch.sum(self.criterion(model_out.float(), self.labels), dim=[1,2,3])
+            #print(type(regLoss), type(test))
 
-            #print("Total Loss:", self.loss)
-            
-            
+            #Calculate swapped loss
+            swapLabels = copy.deepcopy(self.labels)
+            swapLabels[swapLabels==2] = -3
+            swapLabels[swapLabels==3] = 2
+            swapLabels[swapLabels==-3] = 3
+            swapLoss = torch.sum(self.criterion(model_out.float(), swapLabels), dim=[1,2,3])
+
             softmax          = self.softmax(model_out)
             predicted_labels = torch.argmax(model_out,dim=1)
-            #print("Predicted Labels:",predicted_labels)
-            #accuracy         = (predicted_labels == self.labels).sum().item() / float(predicted_labels.nelement())
-            #accuracy = 1.0
 
+            self.loss = torch.mean(torch.min(regLoss, swapLoss)) #Calculate the overall loss as the mean of the tensor of minimums from the two loss methods.
+            #print(type(self.loss))
+            lossPositions = torch.gt(regLoss, swapLoss) # Element-wise true if should use swapLoss, false if should use regLoss
+
+            '''
             correctlyIdentified = ((predicted_labels == self.labels) & (self.labels != 0)).sum().item()
             total = (self.labels != 0).sum().item()
             accuracy = correctlyIdentified/total
+            '''
+
+            accArray = []
+            for eventNum in range(self.labels.shape[0]):
+                if(lossPositions[eventNum]): #regular loss > swap loss -> use swap
+                    correct = ((swapLabels[eventNum]  == predicted_labels[eventNum] ) & (swapLabels[eventNum]  != 0)).sum().item()
+                else: #regular loss <= swap loss -> use regular
+                    correct = ((self.labels[eventNum] == predicted_labels[eventNum] ) & (self.labels[eventNum]  != 0)).sum().item()
+
+                total = (self.labels[eventNum]  != 0).sum().item()
+                accArray.append(correct/total)
+
+            accuracy = np.mean(accArray)
+    
         
         return {'loss'             : self.loss.detach().cpu().item(),
                 'predicted_labels' : predicted_labels.detach().cpu().numpy(),
@@ -346,11 +372,16 @@ class ClassifierEngine:
             loss, accuracy, indices, labels, predictions, softmaxes= [],[],[],[],[],[]
             
             # Extract the event data and label from the DataLoader iterator
+            
             for it, eval_data in enumerate(self.data_loaders["test"]):
-                
+
+                if(it >= 1):
+                    break
+
                 # TODO: see if copying helps
                 self.data = copy.deepcopy(eval_data['data'].float())
-                self.labels = copy.deepcopy(eval_data['labels'].long())
+                self.data = torch.unsqueeze(self.data,1)
+                self.labels = copy.deepcopy(eval_data['segmented_labels'].long())
                 
                 eval_indices = copy.deepcopy(eval_data['indices'].long().to("cpu"))
 
@@ -362,6 +393,12 @@ class ClassifierEngine:
                 
                 # Copy the tensors back to the CPU
                 self.labels = self.labels.to("cpu")
+
+                #Plot first eventent
+                eventNumberToPlot = 75 #Change this to select event, must be in range [0, test_batch_size]
+                self.plot_event(eval_data["data"][eventNumberToPlot], self.mpmt_positions, save_file_name = "data.png", cmap=plt.cm.gist_heat_r)
+                self.plot_event(eval_data["segmented_labels"][eventNumberToPlot], self.mpmt_positions, save_file_name = "labels.png", cmap=ListedColormap(["white", "gray", "yellow", "green", "red", "blue"]))
+                self.plot_event(result["predicted_labels"][eventNumberToPlot], self.mpmt_positions, save_file_name = "predictions.png", cmap=ListedColormap(["white", "gray", "yellow", "green", "red", "blue"]))
                 
                 # Add the local result to the final result
                 indices.extend(eval_indices)
@@ -382,10 +419,11 @@ class ClassifierEngine:
 
         local_eval_metrics_dict = {"eval_iterations":iterations, "eval_loss":loss, "eval_acc":accuracy}
         
+        #These are lists of np arrays
         indices     = np.array(indices)
-        labels      = np.array(labels)
-        predictions = np.array(predictions)
-        softmaxes   = np.array(softmaxes)
+        labels      = np.stack(labels,axis=0)
+        predictions = np.stack(predictions,axis=0)
+        softmaxes   = np.stack(softmaxes,axis=0)
         
         local_eval_results_dict = {"indices":indices, "labels":labels, "predictions":predictions, "softmaxes":softmaxes}
 
@@ -398,6 +436,7 @@ class ClassifierEngine:
                 for name, tensor in zip(global_eval_metrics_dict.keys(), global_eval_metrics_dict.values()):
                     local_eval_metrics_dict[name] = np.array(tensor.cpu())
                 
+                #Will have to adjust these if we ever go to distributed
                 indices     = np.array(global_eval_results_dict["indices"].cpu())
                 labels      = np.array(global_eval_results_dict["labels"].cpu())
                 predictions = np.array(global_eval_results_dict["predictions"].cpu())
@@ -421,7 +460,35 @@ class ClassifierEngine:
 
             print("\nAvg eval loss : " + str(val_loss/val_iterations),
                   "\nAvg eval acc : "  + str(val_acc/val_iterations))
-        
+
+
+
+
+    def channel_to_position(self, channel):
+        channel = channel % 19 
+        theta = (channel<12)*2*np.pi*channel/12 + ((channel >= 12) & (channel<18))*2*np.pi*(channel-12)/6
+        radius = 0.2*(channel<18)+0.2*(channel<12)
+        position = [radius*np.cos(theta), radius*np.sin(theta)] # note this is [y, x] or [row, column]
+        return position
+
+
+    def plot_event(self, data, mpmt_pos, save_file_name = "output.png", old_convention=False, **plot_args):
+
+        fig = plt.figure(figsize=(20,12))
+        ax = fig.add_subplot(111)
+        mpmts = ax.scatter(mpmt_pos[:, 1], mpmt_pos[:, 0], s=380, facecolors='none', edgecolors='0.9')
+        indices = np.indices(data.shape)
+        channels = indices[0].flatten()
+        positions = indices[1:].reshape(2,-1).astype(np.float64)
+        positions += self.channel_to_position(channels)
+        if old_convention:
+            positions[1] = max(mpmt_pos[:, 1])-positions[1]
+        pmts = ax.scatter(positions[1], positions[0], c=data.flatten(), s=3, **plot_args)
+        plt.colorbar(pmts)
+
+        plt.savefig(save_file_name)
+        print("Saved figure as:", save_file_name)
+
     # ========================================================================
     def restore_best_state(self):
         best_validation_path = "{}{}{}{}".format(self.dirpath,
@@ -475,7 +542,7 @@ class ClassifierEngine:
         """
         filename = "{}{}{}{}".format(self.dirpath,
                                      str(self.model._get_name()),
-                                     ("BEST3d" if best else ""),
+                                     ("BEST3dnew1" if best else ""),
                                      ".pth")
         
         # Save model state dict in appropriate from depending on number of gpus

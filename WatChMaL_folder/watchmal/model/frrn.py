@@ -7,8 +7,8 @@ from watchmal.utils.frrn_utils import FRRU, RU, conv3DBatchNormRelu, conv3DGroup
 
 frrn_specs_dic = {
     "A": {
-        "encoder": [[3, 96, 2], [4, 192, 4], [2, 384, 8], [2, 384, 16]],
-        "decoder": [[2, 192, 8], [2, 192, 4], [2, 48, 2]],
+        "encoder": [[3, 8, (1,1,2)]],
+        "decoder": [],
     },
     "B": {
         "encoder": [[3, 8, (1,1,2)], [4, 16, (1,1,4)], [2, 32, (1,1,8)]],
@@ -20,7 +20,7 @@ frrn_specs_dic = {
 class frrn(nn.Module):
 
 
-    def __init__(self, n_classes=4, model_type="B", group_norm=False, n_groups=16):
+    def __init__(self, n_classes=4, model_type="A", group_norm=False, n_groups=16):
 
         super(frrn, self).__init__()
         self.n_classes = n_classes
@@ -61,8 +61,6 @@ class frrn(nn.Module):
         self.down_residual_units = nn.ModuleList(self.down_residual_units)
 
         self.split_conv_3d = nn.Conv3d(4, 4, kernel_size=(19,1,1), padding=(9,0,0), stride=1, bias=False)
-
-        
 
         
         # each spec is as (n_blocks, channels, scale)
