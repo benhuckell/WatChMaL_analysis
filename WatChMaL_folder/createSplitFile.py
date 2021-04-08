@@ -50,6 +50,16 @@ for event in range(labelsTensor.shape[0]):
 print(accArray)
 
 
+addTensor = torch.zeros(4,2,1,2)
+print(addTensor.shape)
+
+out = torch.cat((labelsTensor,addTensor), dim = 2)
+print(out.shape)
+
+out2 = out[:,:,0:2,:]
+print(out2.shape)
+
+
 
 
 '''

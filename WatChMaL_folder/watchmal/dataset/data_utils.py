@@ -90,8 +90,8 @@ def get_segmentation_data_loader(dataset, batch_size, sampler, num_workers, is_d
         sampler = DistributedSamplerWrapper(sampler=sampler, seed=seed)
     
     # TODO: added drop_last, should decide if we want to keep this
-    print("Dataset:", dataset)
-    print("Batch Size:",batch_size)
+    #print("Dataset:", dataset)
+    #print("Batch Size:",batch_size)
     return DataLoader(dataset, sampler=sampler, batch_size=batch_size, num_workers=num_workers, drop_last=True), dataset.digi_dataset.mpmt_positions
 
 def get_transformations(transformations, transform_names):

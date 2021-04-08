@@ -102,61 +102,58 @@ class ClassifierEngine:
         
         Returns : a dict of loss, predicted labels, softmax, accuracy, and raw model outputs
         """
+        
 
         with torch.set_grad_enabled(train):
+            
             # Move the data and the labels to the GPU (if using CPU this has no effect)
-            self.data = self.data.to(self.device) #shape (batch_size, 19, 40, 40)
+            self.data = self.data.to(self.device)
             self.labels = self.labels.to(self.device)
 
             #print("Model Input size:", self.data.shape)
             #print("Labels Tensor size:", self.labels.shape)
 
-            model_out = self.model(self.data) #predictions are generated, shape (batch_size, # classes, 40, 40)
-            
+            model_out = self.model(self.data) #predictions are generated, shape (batch_size, # classes, 32, 40)
 
+            
             #print("Model Output size:", model_out.shape)
             #print(model_out[0,:,0,0])
             #print("Labels Tensor size:", self.labels.shape)
             #print(torch.count_nonzero(self.labels))
             #print(torch.unique(self.labels))
+    
+            #Remove extra columns added for pooling
+            model_out = model_out[:,:,:,0:29,:]
+            self.labels = self.labels[:,:,0:29,:]
 
             #Calculate first loss
             regLoss = torch.sum(self.criterion(model_out.float(), self.labels), dim=[1,2,3])
-            #print(type(regLoss), type(test))
 
+            
+ 
             #Calculate swapped loss
-            swapLabels = copy.deepcopy(self.labels)
-            swapLabels[swapLabels==2] = -3
-            swapLabels[swapLabels==3] = 2
-            swapLabels[swapLabels==-3] = 3
+            swapLabels = self.labels.clone()
+            
+            parent2Mask = swapLabels == 2
+            parent3Mask = swapLabels == 3
+            swapLabels[parent2Mask] = 3
+            swapLabels[parent3Mask] = 2
+            
             swapLoss = torch.sum(self.criterion(model_out.float(), swapLabels), dim=[1,2,3])
 
             softmax          = self.softmax(model_out)
             predicted_labels = torch.argmax(model_out,dim=1)
 
             self.loss = torch.mean(torch.min(regLoss, swapLoss)) #Calculate the overall loss as the mean of the tensor of minimums from the two loss methods.
-            #print(type(self.loss))
-            lossPositions = torch.gt(regLoss, swapLoss) # Element-wise true if should use swapLoss, false if should use regLoss
+            
+            regAcc = torch.sum((self.labels == predicted_labels) & (self.labels != 0), dim = (1,2,3), dtype=float)
+            swapAcc = torch.sum((swapLabels == predicted_labels) & (swapLabels != 0), dim = (1,2,3), dtype=float)
+            totalParents = torch.sum(self.labels != 0, dim=(1,2,3), dtype=float)
+            
+            accuracy = (torch.mean(torch.max(regAcc, swapAcc)/totalParents)).item()
+            
+            
 
-            '''
-            correctlyIdentified = ((predicted_labels == self.labels) & (self.labels != 0)).sum().item()
-            total = (self.labels != 0).sum().item()
-            accuracy = correctlyIdentified/total
-            '''
-
-            accArray = []
-            for eventNum in range(self.labels.shape[0]):
-                if(lossPositions[eventNum]): #regular loss > swap loss -> use swap
-                    correct = ((swapLabels[eventNum]  == predicted_labels[eventNum] ) & (swapLabels[eventNum]  != 0)).sum().item()
-                else: #regular loss <= swap loss -> use regular
-                    correct = ((self.labels[eventNum] == predicted_labels[eventNum] ) & (self.labels[eventNum]  != 0)).sum().item()
-
-                total = (self.labels[eventNum]  != 0).sum().item()
-                accArray.append(correct/total)
-
-            accuracy = np.mean(accArray)
-    
-        
         return {'loss'             : self.loss.detach().cpu().item(),
                 'predicted_labels' : predicted_labels.detach().cpu().numpy(),
                 'softmax'          : softmax.detach().cpu().numpy(),
@@ -225,8 +222,6 @@ class ClassifierEngine:
             if self.is_distributed:
                 train_loader.sampler.set_epoch(epoch)
 
-            print("Outside train loop")
-
             # local training loop for batches in a single epoch
             for i, train_data in enumerate(self.data_loaders["train"]):
 
@@ -235,7 +230,7 @@ class ClassifierEngine:
                 #print("Data:", i, train_data["data"].shape)
                 
                 # run validation on given intervals
-                if self.iteration % val_interval == 2:
+                if self.iteration % val_interval == 0:
                     # set model to eval mode
                     self.model.eval()
 
@@ -250,14 +245,18 @@ class ClassifierEngine:
                             val_data = next(val_iter)
                         
                         # extract the event data from the input data tuple
-                        self.data      = val_data['data'].float()
-                        self.data = torch.unsqueeze(self.data,1)
+                        self.data      = val_data['data'].float() # [batch_size, 19, 29, 40]
+                        self.data      = torch.cat((self.data, torch.zeros(self.data.shape[0], self.data.shape[1], 3, self.data.shape[3], dtype=torch.float)), dim = 2)
+                        self.data      = torch.unsqueeze(self.data,1) # [batch_size, 1, 19, 29, 40]
                         self.labels    = val_data['segmented_labels'].long()
-                        self.energies  = val_data['energies'].float()
-                        self.angles    = val_data['angles'].float()
-                        self.event_ids = val_data['event_ids'].float()
+                        self.labels    = torch.cat((self.labels, torch.zeros(self.labels.shape[0], self.labels.shape[1], 3, self.labels.shape[3], dtype=torch.long)), dim = 2)
+
+                        startValTime = time()
 
                         val_res = self.forward(False)
+
+                        valTimeElapsed = time() - startValTime
+                        #print("Val time:", valTimeElapsed)
                         
                         val_metrics["loss"] += val_res["loss"]
                         val_metrics["accuracy"] += val_res["accuracy"]
@@ -300,17 +299,20 @@ class ClassifierEngine:
                         self.val_log.record(val_metrics)
                         self.val_log.write()
                         self.val_log.flush()
+
+                startTrainTime = time()
                 
                 # Train on batch
                 self.data      = train_data['data'].float()
+                self.data      = torch.cat((self.data, torch.zeros(self.data.shape[0], self.data.shape[1], 3, self.data.shape[3], dtype=torch.float)), dim = 2) #Add extra dim to height to make it 32
                 self.data = torch.unsqueeze(self.data,1)
                 self.labels    = train_data['segmented_labels'].long()
-                self.energies  = train_data['energies'].float()
-                self.angles    = train_data['angles'].float()
-                self.event_ids = train_data['event_ids'].float()
+                self.labels    = torch.cat((self.labels, torch.zeros(self.labels.shape[0], self.labels.shape[1], 3, self.labels.shape[3], dtype = torch.long)), dim = 2)
+
 
                 # Call forward: make a prediction & measure the average error using data = self.data
                 res = self.forward(True)
+
 
                 #Call backward: backpropagate error and update weights using loss = self.loss
                 self.backward()
@@ -327,12 +329,14 @@ class ClassifierEngine:
                 self.train_log.record(train_metrics)
                 self.train_log.write()
                 self.train_log.flush()
-                
+
+                totalTimeElapsed = time() - startTrainTime
+                timePerEpoch = totalTimeElapsed*len(self.data_loaders["train"])/60
                 
                 # print the metrics at given intervals
                 if self.rank == 0 and self.iteration % report_interval == 0:
-                    print("... Iteration %d ... Epoch %1.2f ... Training Loss %1.3f ... Training Accuracy %1.3f" %
-                          (self.iteration, epoch, res["loss"], res["accuracy"]))
+                    print("Iteration %d ... Epoch %1.2f ... Training Loss %1.3f ... Training Accuracy %1.3f ... Time %1.2fs ... /Epoch %1.2fm" %
+                          (self.iteration, epoch, res["loss"], res["accuracy"], totalTimeElapsed, timePerEpoch))
                 
                 if epoch >= epochs:
                     break
@@ -380,8 +384,10 @@ class ClassifierEngine:
 
                 # TODO: see if copying helps
                 self.data = copy.deepcopy(eval_data['data'].float())
+                self.data      = torch.cat((self.data, torch.zeros(self.data.shape[0], self.data.shape[1], 3, self.data.shape[3], dtype=torch.float)), dim = 2)
                 self.data = torch.unsqueeze(self.data,1)
                 self.labels = copy.deepcopy(eval_data['segmented_labels'].long())
+                self.labels    = torch.cat((self.labels, torch.zeros(self.labels.shape[0], self.labels.shape[1], 3, self.labels.shape[3], dtype = torch.long)), dim = 2)
                 
                 eval_indices = copy.deepcopy(eval_data['indices'].long().to("cpu"))
 
@@ -395,7 +401,8 @@ class ClassifierEngine:
                 self.labels = self.labels.to("cpu")
 
                 #Plot first eventent
-                eventNumberToPlot = 75 #Change this to select event, must be in range [0, test_batch_size]
+                eventNumberToPlot = 61 #Change this to select event, must be in range [0, test_batch_size]
+                #plotSavePath = 
                 self.plot_event(eval_data["data"][eventNumberToPlot], self.mpmt_positions, save_file_name = "data.png", cmap=plt.cm.gist_heat_r)
                 self.plot_event(eval_data["segmented_labels"][eventNumberToPlot], self.mpmt_positions, save_file_name = "labels.png", cmap=ListedColormap(["white", "gray", "yellow", "green", "red", "blue"]))
                 self.plot_event(result["predicted_labels"][eventNumberToPlot], self.mpmt_positions, save_file_name = "predictions.png", cmap=ListedColormap(["white", "gray", "yellow", "green", "red", "blue"]))
@@ -492,8 +499,7 @@ class ClassifierEngine:
     # ========================================================================
     def restore_best_state(self):
         best_validation_path = "{}{}{}{}".format(self.dirpath,
-                                     str(self.model._get_name()),
-                                     "BEST",
+                                     str(self.model._get_name()),                                    "BEST2",
                                      ".pth")
 
         self.restore_state_from_file(best_validation_path)

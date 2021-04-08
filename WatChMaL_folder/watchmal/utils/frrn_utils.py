@@ -363,10 +363,13 @@ class FRRU(nn.Module):
         self.group_norm = group_norm
         self.n_groups = n_groups
 
+        self.residualWeight = 0.5
+        self.poolingWeight = 0.5
+
         if self.group_norm:
             conv_unit = conv3DGroupNormRelu
             self.conv1 = conv_unit(
-                prev_channels + 4,
+                prev_channels + 8,
                 out_channels,
                 k_size=3,
                 stride=1,
@@ -394,8 +397,14 @@ class FRRU(nn.Module):
             )
 
         self.conv_res = nn.Conv3d(out_channels, 4, kernel_size=(19,1,1), stride=1, padding=(9,0,0))
+        self.conv_down_res = nn.Conv3d(4,prev_channels,kernel_size=(19,1,1), stride=1, padding=(9,0,0))
 
     def forward(self, y, z):
+        #y = y * self.residualWeight
+        #zp = self.conv_down_res(z)
+        #print("shape:", y.shape, zp.shape)
+        #x = y.add(nn.MaxPool3d(self.scale, self.scale)(zp) * self.poolingWeight)
+
         x = torch.cat([y, nn.MaxPool3d(self.scale, self.scale)(z)], dim=1)
         y_prime = self.conv1(x)
         y_prime = self.conv2(y_prime)
@@ -408,6 +417,7 @@ class FRRU(nn.Module):
         #upsample_size = (torch.tensor(np.asarray(scale_factor)) * y_prime.shape[2:]).shape
         #print("upsample:", upsample_size)
         x = F.upsample(x, size=upsample_size, mode="nearest")
+        
         z_prime = z + x
 
         return y_prime, z_prime

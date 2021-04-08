@@ -1,5 +1,5 @@
 gpu_list:
-    - 6
+    - 0
 seed: null
 dump_path: './outputs/'
 defaults:
@@ -7,6 +7,7 @@ defaults:
     - data/dataset: iwcd_segmentation
     - model: segmentation
     - engine: segmentation
+    #- tasks/restore_state: restore_state_segmentation
     - tasks/train: train_frrn
     - optimizers@tasks.train.optimizers: adam
     - sampler@tasks.train.data_loaders.train.sampler: subset_random
