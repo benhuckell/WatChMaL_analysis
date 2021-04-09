@@ -388,8 +388,9 @@ class ClassifierEngine:
                 self.data = torch.unsqueeze(self.data,1)
                 self.labels = copy.deepcopy(eval_data['segmented_labels'].long())
                 self.labels    = torch.cat((self.labels, torch.zeros(self.labels.shape[0], self.labels.shape[1], 3, self.labels.shape[3], dtype = torch.long)), dim = 2)
-                
+
                 eval_indices = copy.deepcopy(eval_data['indices'].long().to("cpu"))
+                #print(eval_indices)
 
                 # Run the forward procedure and output the result
                 result = self.forward(False)
@@ -401,8 +402,12 @@ class ClassifierEngine:
                 self.labels = self.labels.to("cpu")
 
                 #Plot first eventent
-                eventNumberToPlot = 61 #Change this to select event, must be in range [0, test_batch_size]
-                #plotSavePath = 
+                eventNumberToPlot = 85 #Change this to select event, must be in range [0, test_batch_size]
+                plotSavePath = "/home/benhuckell/Documents/Capstone2020"
+
+                #if(np.sum(eval_data["segmented_labels"][eventNumberToPlot] == result["predicted_labels"]) > 0):
+
+
                 self.plot_event(eval_data["data"][eventNumberToPlot], self.mpmt_positions, save_file_name = "data.png", cmap=plt.cm.gist_heat_r)
                 self.plot_event(eval_data["segmented_labels"][eventNumberToPlot], self.mpmt_positions, save_file_name = "labels.png", cmap=ListedColormap(["white", "gray", "yellow", "green", "red", "blue"]))
                 self.plot_event(result["predicted_labels"][eventNumberToPlot], self.mpmt_positions, save_file_name = "predictions.png", cmap=ListedColormap(["white", "gray", "yellow", "green", "red", "blue"]))
@@ -444,21 +449,22 @@ class ClassifierEngine:
                     local_eval_metrics_dict[name] = np.array(tensor.cpu())
                 
                 #Will have to adjust these if we ever go to distributed
-                indices     = np.array(global_eval_results_dict["indices"].cpu())
+                #indices     = np.array(global_eval_results_dict["indices"].cpu())
                 labels      = np.array(global_eval_results_dict["labels"].cpu())
                 predictions = np.array(global_eval_results_dict["predictions"].cpu())
-                softmaxes   = np.array(global_eval_results_dict["softmaxes"].cpu())
+                #softmaxes   = np.array(global_eval_results_dict["softmaxes"].cpu())
         
         if self.rank == 0:
             print("Sorting Outputs...")
             sorted_indices = np.argsort(indices)
-
+            
             # Save overall evaluation results
             print("Saving Data...")
-            np.save(self.dirpath + "indices.npy", sorted_indices)
+            #np.save(self.dirpath + "indices.npy", sorted_indices)
             np.save(self.dirpath + "labels.npy", labels[sorted_indices])
             np.save(self.dirpath + "predictions.npy", predictions[sorted_indices])
-            np.save(self.dirpath + "softmax.npy", softmaxes[sorted_indices])
+            #np.save(self.dirpath + "softmax.npy", softmaxes[sorted_indices])
+            
 
             # Compute overall evaluation metrics
             val_iterations = np.sum(local_eval_metrics_dict["eval_iterations"])
@@ -548,7 +554,7 @@ class ClassifierEngine:
         """
         filename = "{}{}{}{}".format(self.dirpath,
                                      str(self.model._get_name()),
-                                     ("BEST3dnew1" if best else ""),
+                                     ("BESTdeepmodel" if best else ""),
                                      ".pth")
         
         # Save model state dict in appropriate from depending on number of gpus

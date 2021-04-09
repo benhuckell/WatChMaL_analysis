@@ -17,6 +17,10 @@ frrn_specs_dic = {
     "C": {
         "encoder": [[3, 16, (1,2,2)], [4, 32, (1,4,4)], [2, 64, (1,8,8)]],
         "decoder": [[2, 32, (1,4,4)], [2, 8, (1,2,2)]],
+    },
+    "D": {
+        "encoder": [[3, 8, (1,1,2)], [4, 16, (1,1,4)], [2, 32, (1,1,8)]],
+        "decoder": [[2, 16, (1,1,4)], [2, 4, (1,1,2)]],
     }
 }
 
@@ -24,10 +28,10 @@ frrn_specs_dic = {
 class frrn(nn.Module):
 
 
-    def __init__(self, n_classes=4, model_type="B", group_norm=False, n_groups=16):
+    def __init__(self, n_classes=4, model_type="C", group_norm=False, n_groups=16):
 
         super(frrn, self).__init__()
-        self.n_channels = 4
+        self.n_channels = 8
         self.n_classes = n_classes
         self.model_type = model_type
         self.group_norm = group_norm

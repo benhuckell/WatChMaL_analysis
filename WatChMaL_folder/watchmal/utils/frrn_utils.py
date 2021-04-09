@@ -369,7 +369,7 @@ class FRRU(nn.Module):
         if self.group_norm:
             conv_unit = conv3DGroupNormRelu
             self.conv1 = conv_unit(
-                prev_channels + 8,
+                prev_channels,
                 out_channels,
                 k_size=3,
                 stride=1,
@@ -390,14 +390,14 @@ class FRRU(nn.Module):
         else:
             conv_unit = conv3DBatchNormRelu
             self.conv1 = conv_unit(
-                prev_channels + 4, out_channels, k_size=(19,3,3), stride=1, padding=(9,1,1), bias=False
+                prev_channels + 8, out_channels, k_size=(19,3,3), stride=1, padding=(9,1,1), bias=False
             )
             self.conv2 = conv_unit(
                 out_channels, out_channels, k_size=(19,3,3), stride=1, padding=(9,1,1), bias=False
             )
 
-        self.conv_res = nn.Conv3d(out_channels, 4, kernel_size=(19,1,1), stride=1, padding=(9,0,0))
-        self.conv_down_res = nn.Conv3d(4,prev_channels,kernel_size=(19,1,1), stride=1, padding=(9,0,0))
+        self.conv_res = nn.Conv3d(out_channels, 8, kernel_size=(19,1,1), stride=1, padding=(9,0,0))
+        self.conv_down_res = nn.Conv3d(8,prev_channels,kernel_size=(19,1,1), stride=1, padding=(9,0,0))
 
     def forward(self, y, z):
         #y = y * self.residualWeight

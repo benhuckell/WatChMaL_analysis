@@ -1,2 +1,9 @@
 # @package _group_
-weight_file: '/home/bhuckell/WatChMaL_analysis/WatChMaL_folder/outputs/2021-04-06/13-22-10/outputs/frrnBEST3dnew1.pth'
+#Shallow model
+#weight_file: '/home/bhuckell/WatChMaL_analysis/WatChMaL_folder/outputs/2021-03-27/21-52-46/outputs/frrnBEST3dnew.pth'
+
+#Deep Model
+#weight_file: '/home/bhuckell/WatChMaL_analysis/WatChMaL_folder/outputs/2021-04-05/20-27-28/outputs/frrnBEST3dnew1.pth'
+
+#Double Deep
+weight_file: '/home/bhuckell/WatChMaL_analysis/WatChMaL_folder/outputs/2021-04-07/21-46-15/outputs/doubledeep.pth'
