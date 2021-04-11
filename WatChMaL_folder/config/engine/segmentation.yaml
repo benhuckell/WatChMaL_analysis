@@ -1,2 +1,2 @@
 # @package _group_
-_target_: watchmal.engine.engine_segmentation.ClassifierEngine
+_target_: watchmal.engine.engine_segmentation.SegmentationEngine

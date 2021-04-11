@@ -71,7 +71,6 @@ class frrn(nn.Module):
 
         self.split_conv_3d = nn.Conv3d(self.n_channels, self.n_channels, kernel_size=(19,1,1), padding=(9,0,0), stride=1, bias=False)
 
-        
         # each spec is as (n_blocks, channels, scale)
         self.encoder_frru_specs = frrn_specs_dic[self.model_type]["encoder"]
 
@@ -131,7 +130,6 @@ class frrn(nn.Module):
         # pass to initial conv
         x = self.conv1(x)
 
-
         # pass through residual units
         for i in range(3):
             x = self.up_residual_units[i](x)
@@ -140,12 +138,8 @@ class frrn(nn.Module):
         y = x
         z = self.split_conv_3d(x)
 
-        #print("Model Shape:", z.shape)
-        #print("Model Shape x:", x.shape)
-
         prev_channels = self.n_channels
 
-        
         # encoding
         for n_blocks, channels, scale in self.encoder_frru_specs:
             #print("Settings:",channels, scale)

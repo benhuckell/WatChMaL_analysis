@@ -63,28 +63,6 @@ class conv3DGroupNorm(nn.Module):
         outputs = self.cg_unit(inputs)
         return outputs
 
-
-class deconv2DBatchNorm(nn.Module):
-    def __init__(self, in_channels, n_filters, k_size, stride, padding, bias=True):
-        super(deconv2DBatchNorm, self).__init__()
-
-        self.dcb_unit = nn.Sequential(
-            nn.ConvTranspose2d(
-                int(in_channels),
-                int(n_filters),
-                kernel_size=k_size,
-                padding=padding,
-                stride=stride,
-                bias=bias,
-            ),
-            nn.BatchNorm2d(int(n_filters)),
-        )
-
-    def forward(self, inputs):
-        outputs = self.dcb_unit(inputs)
-        return outputs
-
-
 class conv3DBatchNormRelu(nn.Module):
     def __init__(
         self,
@@ -146,28 +124,6 @@ class conv3DGroupNormRelu(nn.Module):
         return outputs
 
 
-class deconv2DBatchNormRelu(nn.Module):
-    def __init__(self, in_channels, n_filters, k_size, stride, padding, bias=True):
-        super(deconv2DBatchNormRelu, self).__init__()
-
-        self.dcbr_unit = nn.Sequential(
-            nn.ConvTranspose2d(
-                int(in_channels),
-                int(n_filters),
-                kernel_size=k_size,
-                padding=padding,
-                stride=stride,
-                bias=bias,
-            ),
-            nn.BatchNorm2d(int(n_filters)),
-            nn.ReLU(inplace=True),
-        )
-
-    def forward(self, inputs):
-        outputs = self.dcbr_unit(inputs)
-        return outputs
-
-
 class unetConv2(nn.Module):
     def __init__(self, in_size, out_size, is_batchnorm):
         super(unetConv2, self).__init__()
@@ -204,68 +160,6 @@ class unetUp(nn.Module):
         padding = 2 * [offset // 2, offset // 2]
         outputs1 = F.pad(inputs1, padding)
         return self.conv(torch.cat([outputs1, outputs2], 1))
-
-
-class segnetDown2(nn.Module):
-    def __init__(self, in_size, out_size):
-        super(segnetDown2, self).__init__()
-        self.conv1 = conv2DBatchNormRelu(in_size, out_size, 3, 1, 1)
-        self.conv2 = conv2DBatchNormRelu(out_size, out_size, 3, 1, 1)
-        self.maxpool_with_argmax = nn.MaxPool2d(2, 2, return_indices=True)
-
-    def forward(self, inputs):
-        outputs = self.conv1(inputs)
-        outputs = self.conv2(outputs)
-        unpooled_shape = outputs.size()
-        outputs, indices = self.maxpool_with_argmax(outputs)
-        return outputs, indices, unpooled_shape
-
-
-class segnetDown3(nn.Module):
-    def __init__(self, in_size, out_size):
-        super(segnetDown3, self).__init__()
-        self.conv1 = conv2DBatchNormRelu(in_size, out_size, 3, 1, 1)
-        self.conv2 = conv2DBatchNormRelu(out_size, out_size, 3, 1, 1)
-        self.conv3 = conv2DBatchNormRelu(out_size, out_size, 3, 1, 1)
-        self.maxpool_with_argmax = nn.MaxPool2d(2, 2, return_indices=True)
-
-    def forward(self, inputs):
-        outputs = self.conv1(inputs)
-        outputs = self.conv2(outputs)
-        outputs = self.conv3(outputs)
-        unpooled_shape = outputs.size()
-        outputs, indices = self.maxpool_with_argmax(outputs)
-        return outputs, indices, unpooled_shape
-
-
-class segnetUp2(nn.Module):
-    def __init__(self, in_size, out_size):
-        super(segnetUp2, self).__init__()
-        self.unpool = nn.MaxUnpool2d(2, 2)
-        self.conv1 = conv2DBatchNormRelu(in_size, in_size, 3, 1, 1)
-        self.conv2 = conv2DBatchNormRelu(in_size, out_size, 3, 1, 1)
-
-    def forward(self, inputs, indices, output_shape):
-        outputs = self.unpool(input=inputs, indices=indices, output_size=output_shape)
-        outputs = self.conv1(outputs)
-        outputs = self.conv2(outputs)
-        return outputs
-
-
-class segnetUp3(nn.Module):
-    def __init__(self, in_size, out_size):
-        super(segnetUp3, self).__init__()
-        self.unpool = nn.MaxUnpool2d(2, 2)
-        self.conv1 = conv2DBatchNormRelu(in_size, in_size, 3, 1, 1)
-        self.conv2 = conv2DBatchNormRelu(in_size, in_size, 3, 1, 1)
-        self.conv3 = conv2DBatchNormRelu(in_size, out_size, 3, 1, 1)
-
-    def forward(self, inputs, indices, output_shape):
-        outputs = self.unpool(input=inputs, indices=indices, output_size=output_shape)
-        outputs = self.conv1(outputs)
-        outputs = self.conv2(outputs)
-        outputs = self.conv3(outputs)
-        return outputs
 
 
 class residualBlock(nn.Module):
@@ -322,33 +216,6 @@ class residualBottleneck(nn.Module):
         out = self.relu(out)
 
         return out
-
-
-class linknetUp(nn.Module):
-    def __init__(self, in_channels, n_filters):
-        super(linknetUp, self).__init__()
-
-        # B, 2C, H, W -> B, C/2, H, W
-        self.convbnrelu1 = conv2DBatchNormRelu(
-            in_channels, n_filters / 2, k_size=1, stride=1, padding=1
-        )
-
-        # B, C/2, H, W -> B, C/2, H, W
-        self.deconvbnrelu2 = nn.deconv2DBatchNormRelu(
-            n_filters / 2, n_filters / 2, k_size=3, stride=2, padding=0
-        )
-
-        # B, C/2, H, W -> B, C, H, W
-        self.convbnrelu3 = conv2DBatchNormRelu(
-            n_filters / 2, n_filters, k_size=1, stride=1, padding=1
-        )
-
-    def forward(self, x):
-        x = self.convbnrelu1(x)
-        x = self.deconvbnrelu2(x)
-        x = self.convbnrelu3(x)
-        return x
-
 
 class FRRU(nn.Module):
     """

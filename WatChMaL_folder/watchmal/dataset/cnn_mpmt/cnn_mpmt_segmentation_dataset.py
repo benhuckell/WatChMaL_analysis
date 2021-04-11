@@ -12,6 +12,8 @@ from torch.utils.data import Dataset
 import numpy as np
 import pickle
 from scipy import stats
+import matplotlib.pyplot as plt
+from matplotlib.colors import ListedColormap
 
 # WatChMaL imports
 from watchmal.dataset.h5_dataset import H5TrueDataset
@@ -21,7 +23,7 @@ import watchmal.dataset.data_utils as du
 
 class CNNmPMTSegmentationDataset(Dataset):
     def __init__(self, digi_dataset_config, true_hits_h5file, digi_truth_mapping_file, valid_parents=(1, 2, 3),
-                 parent_type="max", transform_segmentation = True):
+                 parent_type="max", transforms = True, is_distributed = False):
         """
         Args:
             digi_dataset_config     ... config for dataset for digitized hits
@@ -29,8 +31,9 @@ class CNNmPMTSegmentationDataset(Dataset):
             digi_truth_mapping_file ... path to file with a pickled list mapping digitized hit events to true hit events
             valid_parents           ... valid ID values for hit parents
         """
-        self.digi_dataset = instantiate(digi_dataset_config)
-        if transform_segmentation:
+        self.digi_dataset = instantiate(digi_dataset_config, is_distributed=is_distributed)
+        self.mpmt_positions = self.digi_dataset.mpmt_positions
+        if transforms:
             self.transforms = self.digi_dataset.transforms
             self.digi_dataset.transforms = None
         else:
@@ -55,7 +58,7 @@ class CNNmPMTSegmentationDataset(Dataset):
         # first take the argmax (will be the only parent if there's only one parent, or first parent if there's multiple parents)
         digi_hit_parent = self.valid_parents[np.argmax(digi_hit_has_parent, axis=0)]
         # replace with -2 for any with more than one parent
-        digi_hit_parent[np.where(np.count_nonzero(digi_hit_has_parent, axis=0)>1)] = -2
+        digi_hit_parent[np.where(np.count_nonzero(digi_hit_has_parent, axis=0)>1)] = 2 #TEMPORARY CHANGE, USED TO BE -2, sets ties to parent 2
         return digi_hit_parent
 
     def get_digi_hit_max_parent(self, digi_hit_pmt, true_hit_pmt, true_hit_parent):
@@ -80,7 +83,7 @@ class CNNmPMTSegmentationDataset(Dataset):
         digi_hit_parent = self.valid_parents[count_argmax]
         # replace with -2 for any digi hits with equal max count of more than one parent
         count_max = digi_hit_parent_count[count_argmax, np.arange(len(count_argmax))]
-        digi_hit_parent[np.where(np.count_nonzero(digi_hit_parent_count==count_max, axis=0)>1)] = 2 #TEMPORARY CHANGE, USED TO BE -2
+        digi_hit_parent[np.where(np.count_nonzero(digi_hit_parent_count==count_max, axis=0)>1)] = 2 #TEMPORARY CHANGE, USED TO BE -2, sets ties to parent 2
         return digi_hit_parent
 
     def __getitem__(self, item):
@@ -97,11 +100,53 @@ class CNNmPMTSegmentationDataset(Dataset):
             data, segmentation = du.apply_random_transformations(self.transforms, data_dict["data"], segmentation)
             data_dict["data"] = data
 
-        #Find max over 19 channels, remove dimension
-        #segmentation = np.squeeze(stats.mode(segmentation, axis=0).mode) # shape (40,40)
-
-        #segmentation = {k: stats.mode(v,axis=0).mode for k, v in segmentation.items()}
-
         data_dict["segmented_labels"] = segmentation #this is a dict of np arrays of shape (19,40,40)
 
         return data_dict    
+
+    def channel_to_position(self, channel):
+        channel = channel % 19 
+        theta = (channel<12)*2*np.pi*channel/12 + ((channel >= 12) & (channel<18))*2*np.pi*(channel-12)/6
+        radius = 0.2*(channel<18)+0.2*(channel<12)
+        position = [radius*np.cos(theta), radius*np.sin(theta)] # note this is [y, x] or [row, column]
+        return position
+
+
+    def plot_events(self, dataList, save_file_names, cmapList, old_convention=False):
+
+        fig = plt.figure(figsize=(50,12))
+
+        for data, plotName, cmap in zip(dataList, save_file_names, cmapList):
+
+            ax = fig.add_subplot(1,3,save_file_names.index(plotName)+1)
+            mpmts = ax.scatter(self.mpmt_positions[:, 1], self.mpmt_positions[:, 0], s=380, facecolors='none', edgecolors='0.9')
+            indices = np.indices(data.shape)
+            channels = indices[0].flatten()
+            positions = indices[1:].reshape(2,-1).astype(np.float64)
+            positions += self.channel_to_position(channels)
+            if old_convention:
+                positions[1] = max(mpmt_pos[:, 1])-positions[1]
+            pmts = ax.scatter(positions[1], positions[0], c=data.flatten(), s=3, cmap=cmap)
+            
+            plt.colorbar(pmts)
+            
+
+        fig.tight_layout()
+        plt.savefig("OutputPlots.png")
+        print("Saved figure as:", save_file_names[0])
+
+    def plot_event(self, fig, data, title, subplot_num, old_convention=False, **plot_args):
+
+        ax = fig.add_subplot(1,3,subplot_num)
+        mpmts = ax.scatter(self.mpmt_positions[:, 1], self.mpmt_positions[:, 0], s=380, facecolors='none', edgecolors='0.9')
+        indices = np.indices(data.shape)
+        channels = indices[0].flatten()
+        positions = indices[1:].reshape(2,-1).astype(np.float64)
+        positions += self.channel_to_position(channels)
+        if old_convention:
+            positions[1] = max(mpmt_pos[:, 1])-positions[1]
+        pmts = ax.scatter(positions[1], positions[0], c=data.flatten(), s=3, **plot_args)
+        plt.colorbar(pmts)
+        ax.set_title(title, fontsize = 35)
+
+        return fig

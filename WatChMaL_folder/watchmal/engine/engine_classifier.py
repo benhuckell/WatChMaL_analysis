@@ -181,7 +181,6 @@ class ClassifierEngine:
                 train_loader.sampler.set_epoch(epoch)
 
             
-
             # local training loop for batches in a single epoch
             for i, train_data in enumerate(self.data_loaders["train"]):
 

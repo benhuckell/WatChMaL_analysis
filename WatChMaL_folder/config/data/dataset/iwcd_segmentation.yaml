@@ -5,4 +5,3 @@ digi_dataset_config:
   mpmt_positions_file: /data/WatChMaL/data/IWCDshort_mPMT_image_positions.npz
   h5file: /fast_scratch/WatChMaL/data/IWCD_mPMT_Short_pi0_E0to1000MeV_digihits.h5
   collapse_arrays: False
-  is_distributed: False
