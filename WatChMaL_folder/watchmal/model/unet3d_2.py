@@ -90,7 +90,7 @@ class UNet(nn.Module):
         self.n_classes = n_classes
         self.trilinear = trilinear
 
-        # self.inc = DoubleConv(n_channels, 16)
+        self.inc = DoubleConv(n_channels, 16)
         self.down1 = Down(16, 32)
         self.down2 = Down(32, 64)
         self.down3 = Down(64, 128)
@@ -103,7 +103,7 @@ class UNet(nn.Module):
         self.outc = OutConv(16 , n_classes)
 
     def forward(self, x):
-        print(x.shape)
+        # print(x.shape)
         x1 = self.inc(x)
         
         x2 = self.down1(x1)
