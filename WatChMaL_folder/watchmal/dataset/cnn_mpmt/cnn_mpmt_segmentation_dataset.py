@@ -111,30 +111,6 @@ class CNNmPMTSegmentationDataset(Dataset):
         position = [radius*np.cos(theta), radius*np.sin(theta)] # note this is [y, x] or [row, column]
         return position
 
-
-    def plot_events(self, dataList, save_file_names, cmapList, old_convention=False):
-
-        fig = plt.figure(figsize=(50,12))
-
-        for data, plotName, cmap in zip(dataList, save_file_names, cmapList):
-
-            ax = fig.add_subplot(1,3,save_file_names.index(plotName)+1)
-            mpmts = ax.scatter(self.mpmt_positions[:, 1], self.mpmt_positions[:, 0], s=380, facecolors='none', edgecolors='0.9')
-            indices = np.indices(data.shape)
-            channels = indices[0].flatten()
-            positions = indices[1:].reshape(2,-1).astype(np.float64)
-            positions += self.channel_to_position(channels)
-            if old_convention:
-                positions[1] = max(mpmt_pos[:, 1])-positions[1]
-            pmts = ax.scatter(positions[1], positions[0], c=data.flatten(), s=3, cmap=cmap)
-            
-            plt.colorbar(pmts)
-            
-
-        fig.tight_layout()
-        plt.savefig("OutputPlots.png")
-        print("Saved figure as:", save_file_names[0])
-
     def plot_event(self, fig, data, title, subplot_num, old_convention=False, **plot_args):
 
         ax = fig.add_subplot(1,3,subplot_num)
