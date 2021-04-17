@@ -25,7 +25,6 @@ from matplotlib.colors import ListedColormap
 from watchmal.dataset.data_utils import get_data_loader
 from watchmal.utils.logging_utils import CSVData
 
-#extraneous testing imports
 
 class SegmentationEngine:
     def __init__(self, model, rank, gpu, dump_path):
@@ -49,7 +48,8 @@ class SegmentationEngine:
 
         self.data_loaders = {}
 
-        self.criterion = nn.CrossEntropyLoss(reduction = "none")
+        # reduction "none" so that loss can be calculated element-wise for swapped labels
+        self.criterion = nn.CrossEntropyLoss(reduction = "none") 
         self.softmax = nn.Softmax(dim=1)
 
         # define the placeholder attributes
@@ -138,7 +138,10 @@ class SegmentationEngine:
         Returns: Swapped Tensor with exact same size/dim as original tensor
         """
 
+        #Create new instance of labels
         swappedLabels = self.labels.clone()
+
+        #Swap labels
         parent2Mask = swappedLabels == label1
         parent3Mask = swappedLabels == label2
         swappedLabels[parent2Mask] = label2
@@ -156,11 +159,18 @@ class SegmentationEngine:
         - The idea behind this is that the larger accuracy value will represent the predictions with the correct label-data parent combination
         """
 
+        #Count correct parents
         nCorrectParents = torch.sum((self.labels == predicted_labels) & (self.labels != 0), dim = (1,2,3), dtype=float)
+
+        #Count total parent labels (i.e. anything except 0)
         totalParents = torch.sum(self.labels != 0, dim=(1,2,3), dtype=float)
 
         if(swappedLabels is not None):
+
+            #Count number of correct parents with swapped labels
             nCorrectSwappedParents = torch.sum((swappedLabels == predicted_labels) & (swappedLabels != 0), dim = (1,2,3), dtype=float)
+            
+            #Take element-wise maximum
             nCorrectParents = torch.max(nCorrectParents, nCorrectSwappedParents)
         
         accuracy = (torch.mean(nCorrectParents/totalParents)).item()
@@ -421,7 +431,6 @@ class SegmentationEngine:
                 self.labels = self.labels.to("cpu")
 
                 #Plot event defined in test config file
-                plotSavePath = "/home/benhuckell/Documents/Capstone2020"
                 self.plot_event_views(eval_data, result, test_config["save_event_plots"]["startId"], test_config["save_event_plots"]["endId"])
 
                 # Add the local result to the final result
@@ -460,7 +469,7 @@ class SegmentationEngine:
                 for name, tensor in zip(global_eval_metrics_dict.keys(), global_eval_metrics_dict.values()):
                     local_eval_metrics_dict[name] = np.array(tensor.cpu())
                 
-                #Will have to adjust these if we ever go to distributed
+                #If distributed evaluation is ever used, these will need to be adjusted
                 indices     = np.array(global_eval_results_dict["indices"].cpu())
                 labels      = np.array(global_eval_results_dict["labels"].cpu())
                 predictions = np.array(global_eval_results_dict["predictions"].cpu())
@@ -471,7 +480,8 @@ class SegmentationEngine:
             sorted_indices = np.argsort(indices)
             
             # Save overall evaluation results
-            #print("Saving Data...")
+            # Due to the size of the output tensors, these files will be faily large
+            print("Saving Data...")
             #np.save(self.dirpath + "indices.npy", sorted_indices)
             #np.save(self.dirpath + "labels.npy", labels[sorted_indices])
             #np.save(self.dirpath + "predictions.npy", predictions[sorted_indices])
@@ -488,6 +498,22 @@ class SegmentationEngine:
 
     # ========================================================================
     def plot_event_views(self, eval_data, result, startEventId, endEventId):
+        """
+        Primary plotting function on evaluation run
+
+        Function will save plots for every specified index in the range [startEventId, endEvendId]
+        - NOTE: Ensure that startEventId, endEventId are within the range [0, test_batch_size]
+        - NOTE: startEventId and endEventId are both specified in test.yaml config file
+
+        Inputs:
+        - eval_data: Data to evaluate, created in evaluate function
+        - result: Predictions tensor, also created in evaluate function
+        - startEventId: Starting index to save plots for
+        - endEventId: Ending index to save plots for
+
+        Outputs:
+        - None
+        """
 
         for eventNumberToPlot in range(startEventId, endEventId+1):
             dirName = "outputs/" + "Event_" + str(eventNumberToPlot) + "/"
@@ -499,9 +525,8 @@ class SegmentationEngine:
             fig = self.data_loaders["test"].dataset.plot_event(fig, result["predicted_labels"][eventNumberToPlot], "Predictions", 3, cmap=ListedColormap(["white", "gray", "yellow", "green", "red", "blue"]))
 
             fig.tight_layout()
-            plt.savefig("output_plots.png")
+            plt.savefig(dirName + "output_plot_" + str(eventNumberToPlot) + ".png")
 
-            
         return
 
     def restore_best_state(self):
@@ -556,7 +581,7 @@ class SegmentationEngine:
         """
         filename = "{}{}{}{}".format(self.dirpath,
                                      str(self.model._get_name()),
-                                     ("BESTdeepmodel2" if best else ""),
+                                     ("BEST" if best else ""),
                                      ".pth")
         
         # Save model state dict in appropriate from depending on number of gpus
