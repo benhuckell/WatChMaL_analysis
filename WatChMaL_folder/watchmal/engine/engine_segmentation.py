@@ -412,9 +412,6 @@ class SegmentationEngine:
             
             for it, eval_data in enumerate(self.data_loaders["test"]):
 
-                if(it >= 1):
-                    break
-
                 # TODO: see if copying helps
                 self.data = copy.deepcopy(eval_data['data'].float())
                 self.labels = copy.deepcopy(eval_data['segmented_labels'].long())
@@ -431,7 +428,7 @@ class SegmentationEngine:
                 self.labels = self.labels.to("cpu")
 
                 #Plot event defined in test config file
-                self.plot_event_views(eval_data, result, test_config["save_event_plots"]["startId"], test_config["save_event_plots"]["endId"])
+                self.plot_event_views(eval_data, result, test_config["save_event_plots"]["startId"], test_config["save_event_plots"]["endId"], it)
 
                 # Add the local result to the final result
                 indices.extend(eval_indices)
@@ -497,7 +494,7 @@ class SegmentationEngine:
 
 
     # ========================================================================
-    def plot_event_views(self, eval_data, result, startEventId, endEventId):
+    def plot_event_views(self, eval_data, result, startEventId, endEventId, testBatchId):
         """
         Primary plotting function on evaluation run
 
@@ -510,14 +507,15 @@ class SegmentationEngine:
         - result: Predictions tensor, also created in evaluate function
         - startEventId: Starting index to save plots for
         - endEventId: Ending index to save plots for
+        - testBatchId: Test Batch Index
 
         Outputs:
         - None
         """
 
         for eventNumberToPlot in range(startEventId, endEventId+1):
-            dirName = "outputs/" + "Event_" + str(eventNumberToPlot) + "/"
-            os.mkdir(dirName)
+            dirName = "outputs/Batch_" + str(testBatchId) + "_Event_" + str(eventNumberToPlot) + "/"
+            os.makedirs(dirName)
 
             fig = plt.figure(figsize=(50,12))
             fig = self.data_loaders["test"].dataset.plot_event(fig, eval_data["data"][eventNumberToPlot], "Data", 1, cmap=plt.cm.gist_heat_r)
